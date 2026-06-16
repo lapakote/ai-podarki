@@ -59,26 +59,29 @@
   .lead{color:var(--muted);font-size:clamp(16px,1.8vw,19px);max-width:640px}
   section{position:relative;padding:clamp(70px,9vw,120px) 0}
 
+  /* ---------- BUTTONS (+ magnetic wrapper) ---------- */
+  .magnetic{display:inline-block}
   .btn{
     display:inline-flex;align-items:center;gap:10px;
     font-family:var(--body);font-weight:700;font-size:15px;
     padding:15px 28px;border-radius:100px;cursor:pointer;border:none;
     transition:transform .25s ease, box-shadow .25s ease;
+    will-change:transform;
   }
   .btn-primary{
     background:linear-gradient(100deg,var(--magenta),var(--amber));
     color:#2a0c1c;box-shadow:var(--glow);
   }
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 80px rgba(255,77,141,.55)}
+  .btn-primary:hover{box-shadow:0 0 80px rgba(255,77,141,.55)}
   .btn-ghost{background:transparent;color:var(--cream);border:1.5px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--rose);transform:translateY(-3px)}
+  .btn-ghost:hover{border-color:var(--rose)}
 
   /* ---------- HERO ---------- */
   header.hero{
     position:relative;min-height:100svh;display:flex;align-items:center;
     padding:120px 0 80px;overflow:hidden;
   }
-  .aurora{position:absolute;inset:0;z-index:0;filter:blur(8px)}
+  .aurora{position:absolute;inset:0;z-index:0;filter:blur(8px);will-change:transform}
   .aurora i{position:absolute;border-radius:50%;opacity:.55;mix-blend-mode:screen;animation:drift 18s ease-in-out infinite}
   .aurora i:nth-child(1){width:560px;height:560px;left:-120px;top:-120px;background:radial-gradient(circle,var(--magenta),transparent 65%)}
   .aurora i:nth-child(2){width:620px;height:620px;right:-160px;top:-60px;background:radial-gradient(circle,var(--amber),transparent 62%);animation-delay:-6s}
@@ -106,20 +109,40 @@
     background:linear-gradient(100deg,var(--rose),var(--amber));
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .hero p.lead{font-size:clamp(17px,2.1vw,22px);margin-bottom:38px}
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-  .hero-note{margin-top:26px;font-size:13px;color:var(--muted);letter-spacing:.02em}
+  /* word-reveal animation for hero title */
+  .hero h1 .word{display:inline-block;opacity:0;filter:blur(6px);transform:translateY(18px) scale(.96);animation:wordIn .7s cubic-bezier(.2,.8,.2,1) forwards}
+  @keyframes wordIn{to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
 
-  /* ---------- SERVICES ---------- */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+  .hero p.lead{font-size:clamp(17px,2.1vw,22px);margin-bottom:38px;opacity:0;animation:fadeUp .8s ease forwards;animation-delay:1.05s}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease forwards;animation-delay:1.25s}
+  .hero-note{margin-top:26px;font-size:13px;color:var(--muted);letter-spacing:.02em;opacity:0;animation:fadeUp .8s ease forwards;animation-delay:1.4s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+  /* cursor sparkle trail */
+  #cursorTrail{position:fixed;inset:0;z-index:50;pointer-events:none}
+  #cursorTrail span{
+    position:absolute;width:6px;height:6px;border-radius:50%;
+    background:radial-gradient(circle,var(--gold),var(--rose) 70%,transparent);
+    box-shadow:0 0 10px rgba(255,212,135,.9);
+    transform:translate(-50%,-50%);
+    animation:trailFade .9s ease-out forwards;
+  }
+  @keyframes trailFade{
+    0%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(.2) translateY(-18px)}
+  }
+
+  /* ---------- SERVICES (3D tilt cards) ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px;perspective:1000px}
   .card{
     background:var(--card);border:1px solid var(--line);border-radius:22px;
-    padding:30px 26px;transition:transform .3s ease,border-color .3s ease,background .3s ease;
+    padding:30px 26px;transition:transform .25s ease,border-color .3s ease,background .3s ease,box-shadow .3s ease;
+    will-change:transform;transform-style:preserve-3d;
   }
-  .card:hover{transform:translateY(-6px);border-color:rgba(255,111,165,.5);background:rgba(255,111,165,.06)}
-  .card .ic{width:46px;height:46px;margin-bottom:18px;color:var(--amber)}
-  .card h3{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:8px}
-  .card p{color:var(--muted);font-size:14.5px}
+  .card:hover{border-color:rgba(255,111,165,.5);background:rgba(255,111,165,.06);box-shadow:0 25px 50px rgba(0,0,0,.35)}
+  .card .ic{width:46px;height:46px;margin-bottom:18px;color:var(--amber);transform:translateZ(20px)}
+  .card h3{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:8px;transform:translateZ(15px)}
+  .card p{color:var(--muted);font-size:14.5px;transform:translateZ(10px)}
 
   /* ---------- BEFORE / AFTER ---------- */
   .ba-section{background:linear-gradient(180deg,transparent,rgba(52,21,82,.5),transparent)}
@@ -136,6 +159,7 @@
   .ba .face svg{width:50px;height:50px;opacity:.85}
   .ba .tag{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;background:rgba(0,0,0,.35);padding:7px 16px;border-radius:100px}
   .ba .handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--cream);transform:translateX(-50%);z-index:4;box-shadow:0 0 18px rgba(255,255,255,.6)}
+  .ba .handle::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:40px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(255,212,135,.55),transparent);filter:blur(6px)}
   .ba .knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--cream);color:#341552;display:flex;align-items:center;justify-content:center;z-index:5;cursor:ew-resize;box-shadow:0 4px 20px rgba(0,0,0,.4);font-size:18px;font-weight:700}
   .ba-cap{text-align:center;color:var(--muted);font-size:13.5px;margin-top:18px}
 
@@ -172,15 +196,6 @@
   .plan .btn{margin-top:auto;justify-content:center}
   .price-note{text-align:center;color:var(--muted);font-size:13.5px;margin-top:28px}
 
-  /* ---------- LOCAL / KALININGRAD ---------- */
-  .local{background:linear-gradient(160deg,var(--plum),var(--night-2));border-radius:34px;padding:clamp(40px,6vw,68px);margin:0 24px;position:relative;overflow:hidden}
-  .local::after{content:"";position:absolute;right:-100px;top:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,177,78,.3),transparent 65%);filter:blur(20px)}
-  .local-inner{position:relative;z-index:2;max-width:600px}
-  .local h2{margin-bottom:18px}
-  .local .lead{margin-bottom:26px}
-  .castle-tags{display:flex;flex-wrap:wrap;gap:10px}
-  .castle-tags span{border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:13.5px;color:var(--muted)}
-
   /* ---------- ABOUT ---------- */
   .about{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center}
   .about-photo{aspect-ratio:1;border-radius:28px;background:linear-gradient(150deg,var(--magenta),#7A3CFF 60%,var(--amber));position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--glow)}
@@ -215,14 +230,22 @@
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
     .reveal{opacity:1;transform:none}
+    .hero h1 .word{opacity:1;filter:none;transform:none}
+    .hero p.lead,.hero-cta,.hero-note{opacity:1}
+    #cursorTrail{display:none}
+  }
+  @media(hover:none){
+    #cursorTrail{display:none}
   }
 </style>
 </head>
 <body>
 
+<div id="cursorTrail"></div>
+
 <!-- ================= HERO ================= -->
 <header class="hero">
-  <div class="aurora"><i></i><i></i><i></i></div>
+  <div class="aurora" id="aurora"><i></i><i></i><i></i></div>
   <div class="stars" id="stars"></div>
 
   <nav class="nav">
@@ -240,11 +263,11 @@
   <div class="wrap">
     <div class="hero-inner">
       <span class="eyebrow">ИИ-подарки на заказ · Калининград</span>
-      <h1>Подарите <span class="accent">эмоции</span>,<br>а не очередную вещь</h1>
+      <h1 id="heroTitle">Подарите <span class="accent">эмоции</span>,<br>а не очередную вещь</h1>
       <p class="lead">Песня, клип, фотокнига или история любви, созданные нейросетями по вашей истории. Подарок, который заставит улыбнуться, прослезиться и пересматривать снова — особенно если вы далеко друг от друга.</p>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Заказать подарок →</a>
-        <a href="#examples" class="btn btn-ghost">Посмотреть примеры</a>
+        <span class="magnetic"><a href="#contact" class="btn btn-primary">Заказать подарок →</a></span>
+        <span class="magnetic"><a href="#examples" class="btn btn-ghost">Посмотреть примеры</a></span>
       </div>
       <p class="hero-note">Старт от 200 ₽ · работаю официально как самозанятая</p>
     </div>
@@ -257,32 +280,32 @@
     <span class="eyebrow reveal">Что я создаю</span>
     <h2 class="reveal">Любая история — в подарок,<br>который запомнят</h2>
     <div class="grid">
-      <div class="card reveal">
+      <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
         <h3>Персональная песня</h3>
         <p>Авторская песня про вашего человека — с его именем, шутками и моментами из жизни.</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></svg>
         <h3>Клип и видео</h3>
         <p>Эмоциональный ролик 1–2 минуты из фото и видео. Контраст, музыка, история — за душу.</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h13l3 3v13H4z"/><path d="M9 4v16M4 9h16"/></svg>
         <h3>Фотокнига и журнал</h3>
         <p>Готовый макет — останется только распечатать в типографии. Журнал «о звезде» из ваших фото.</p>
       </div>
-      <div class="card reveal">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.5-9C.5 8 2.5 4 6 4c2 0 3.2 1.2 4 2.4C10.8 5.2 12 4 14 4c3.5 0 5.5 4 3.5 8C19 16.5 12 21 12 21z"/></svg>
+      <div class="card reveal tilt">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.2-4.6-9.9-9.1C.5 7.8 2 4.5 5.4 4c2.2-.3 3.9 1 4.9 2.7.3.5.6 1 .9 1.5.3-.5.6-1 .9-1.5C12.1 5 13.8 3.7 16 4c3.4.5 4.9 3.8 3.3 7.4-2.7 4.5-9.9 9.1-9.9 9.1z"/></svg>
         <h3>История любви</h3>
         <p>Ваша переписка, музыка и клип — оживлённая хроника отношений. Идеально для свадьбы.</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
         <h3>Календарь</h3>
         <p>Календарь на год с вашими фото в любом стиле — в подарок маме, папе, второй половинке.</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <h3>Открытка и фильм о жизни</h3>
         <p>Цифровая открытка, юмор с ИИ или мини-фильм о жизни человека к юбилею.</p>
@@ -374,7 +397,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Готово за день</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Формат «до / после»</li>
         </ul>
-        <a href="#contact" class="btn btn-ghost">Хочу так же</a>
+        <span class="magnetic"><a href="#contact" class="btn btn-ghost">Хочу так же</a></span>
       </div>
 
       <div class="plan featured reveal">
@@ -386,7 +409,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Музыка и монтаж под настроение</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Правки до нужного результата</li>
         </ul>
-        <a href="#contact" class="btn btn-primary">Заказать</a>
+        <span class="magnetic"><a href="#contact" class="btn btn-primary">Заказать</a></span>
       </div>
 
       <div class="plan reveal">
@@ -398,31 +421,13 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Большой клип для свадьбы / юбилея</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Печатная книга-макет в подарок</li>
         </ul>
-        <a href="#contact" class="btn btn-ghost">Обсудить идею</a>
+        <span class="magnetic"><a href="#contact" class="btn btn-ghost">Обсудить идею</a></span>
       </div>
     </div>
     <p class="price-note reveal">Цены — стартовые, для наполнения портфолио. Постоянным клиентам и за рекомендации — скидки.</p>
   </div>
 </section>
 
-<!-- ================= LOCAL / KALININGRAD ================= 
-<section>
-  <div class="local reveal">
-    <div class="local-inner">
-      <span class="eyebrow">Калининград и область</span>
-      <h2>Оживляю историю замков и города</h2>
-      <p class="lead">У нас невероятно историческая область — и на этом можно играть. Воссоздаю истории замков и людей, которые в них жили, в формате ролика или клипа на 1–1,5 минуты. Замкам и музеям — чтобы показывать гостям, людям — чтобы прикоснуться к прошлому своего края.</p>
-      <div class="castle-tags">
-        <span>Замок Тапиау</span>
-        <span>Замок Вальдау</span>
-        <span>История Калининграда</span>
-        <span>Промо для музеев</span>
-        <span>Личные истории жителей</span>
-      </div>
-    </div>
-  </div>
-</section>
--->
 <!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="wrap">
@@ -475,11 +480,112 @@
     starsBox.appendChild(s);
   }
 
+  // ===== 4. hero title word-reveal (tag-safe) =====
+  (function(){
+    const el = document.getElementById('heroTitle');
+    const html = el.innerHTML;
+    // split keeping full tags (e.g. <span class="accent">эмоции</span>) as single tokens
+    const tokens = html.split(/(<[^>]+>|<br>|\s+)/).filter(t => t !== '' && t !== undefined);
+    let delay = 0;
+    let out = '';
+    let i = 0;
+    while(i < tokens.length){
+      const tok = tokens[i];
+      if(/^\s+$/.test(tok)){ out += tok; i++; continue; }
+      if(tok === '<br>' || /^<br\s*\/?>$/.test(tok)){ out += tok; i++; continue; }
+      if(/^<[^>]+>$/.test(tok) && !tok.startsWith('</')){
+        // opening tag: capture it + its text + its closing tag as ONE animated word
+        let group = tok;
+        i++;
+        while(i < tokens.length && !/^<\/[^>]+>$/.test(tokens[i])){
+          group += tokens[i];
+          i++;
+        }
+        if(i < tokens.length){ group += tokens[i]; i++; } // closing tag
+        const d = delay.toFixed(2); delay += 0.09;
+        out += `<span class="word" style="animation-delay:${d}s">${group}</span>`;
+        continue;
+      }
+      // plain word
+      const d = delay.toFixed(2); delay += 0.09;
+      out += `<span class="word" style="animation-delay:${d}s">${tok}</span>`;
+      i++;
+    }
+    el.innerHTML = out;
+  })();
+
   // reveal on scroll
   const io=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ===== 1. cursor sparkle trail (desktop only, throttled) =====
+  if(window.matchMedia('(hover: hover)').matches){
+    const trailBox = document.getElementById('cursorTrail');
+    let lastSpark = 0;
+    window.addEventListener('mousemove', (e)=>{
+      const now = performance.now();
+      if(now - lastSpark < 45) return;
+      lastSpark = now;
+      const s = document.createElement('span');
+      s.style.left = e.clientX + 'px';
+      s.style.top = e.clientY + 'px';
+      const size = 4 + Math.random()*5;
+      s.style.width = size+'px';
+      s.style.height = size+'px';
+      trailBox.appendChild(s);
+      setTimeout(()=>s.remove(), 950);
+    });
+  }
+
+  // ===== 2. aurora parallax on scroll =====
+  (function(){
+    const aurora = document.getElementById('aurora');
+    if(!aurora) return;
+    let ticking = false;
+    window.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY;
+        aurora.style.transform = `translateY(${y*0.18}px)`;
+        ticking = false;
+      });
+    });
+  })();
+
+  // ===== 5. magnetic buttons =====
+  document.querySelectorAll('.magnetic').forEach(wrap=>{
+    const btn = wrap.querySelector('.btn');
+    if(!btn) return;
+    const strength = 0.35;
+    wrap.addEventListener('mousemove', (e)=>{
+      const r = wrap.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      btn.style.transform = `translate(${x*strength}px, ${y*strength}px)`;
+    });
+    wrap.addEventListener('mouseleave', ()=>{
+      btn.style.transform = 'translate(0,0)';
+    });
+  });
+
+  // ===== 6. 3D tilt on service cards =====
+  document.querySelectorAll('.tilt').forEach(card=>{
+    const maxTilt = 9;
+    card.addEventListener('mousemove', (e)=>{
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width;
+      const py = (e.clientY - r.top)/r.height;
+      const rx = (py - 0.5) * -maxTilt*2;
+      const ry = (px - 0.5) * maxTilt*2;
+      card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
 
   // before / after slider
   (function(){
