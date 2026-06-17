@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<link rel="icon" href="favicon_(1).ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="favicon-180.png"><meta charset="UTF-8">
+<link rel="icon" href="favicon.ico" type="image/x-icon" sizes="100x100">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ИИмоция · ИИ-подарки на заказ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -189,6 +189,65 @@
   .audio-progress{position:relative;height:3px;background:var(--line);border-radius:3px;margin-top:6px;cursor:pointer}
   .audio-progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--rose),var(--amber));border-radius:3px}
 
+  /* ---------- STYLE EXPLORER (compact carousel, linked to the BA example) ---------- */
+  .style-trigger{
+    margin:34px auto 0;display:flex;align-items:center;justify-content:center;gap:10px;
+    background:rgba(255,177,78,.08);border:1px solid rgba(255,177,78,.35);
+    border-radius:100px;padding:13px 24px;font-weight:700;font-size:14.5px;
+    cursor:pointer;transition:transform .25s ease,background .25s ease;width:fit-content;
+    color:var(--cream);font-family:var(--body);
+  }
+  .style-trigger:hover{transform:translateY(-2px);background:rgba(255,177,78,.16)}
+  .style-trigger svg{width:17px;height:17px;color:var(--amber)}
+
+  .style-explorer{
+    max-width:560px;margin:18px auto 0;overflow:hidden;
+    max-height:0;opacity:0;transition:max-height .5s cubic-bezier(.2,.8,.2,1),opacity .4s ease;
+  }
+  .style-explorer.open{max-height:600px;opacity:1}
+  .style-explorer-inner{
+    border:1px solid var(--line);border-radius:24px;background:var(--card);
+    padding:22px 0 18px;
+  }
+  .style-track-wrap{position:relative;padding:0 18px}
+  .style-track{
+    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:2px 2px 10px;-ms-overflow-style:none;scrollbar-width:none;
+  }
+  .style-track::-webkit-scrollbar{display:none}
+  .style-slide{
+    scroll-snap-align:start;flex:0 0 76%;border-radius:18px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:10px;color:#fff;position:relative;overflow:hidden;
+    min-height:190px;
+  }
+  .style-slide .ss-icon{font-size:30px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.35))}
+  .style-slide .ss-name{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.2}
+  .style-slide .ss-desc{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.92)}
+  .style-slide .ss-mood{
+    margin-top:auto;align-self:flex-start;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    background:rgba(0,0,0,.28);padding:5px 12px;border-radius:100px;font-weight:700;
+  }
+  .style-dots{display:flex;justify-content:center;gap:6px;margin-top:6px}
+  .style-dots span{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .25s,transform .25s}
+  .style-dots span.active{background:var(--amber);transform:scale(1.3)}
+  .style-nav-btn{
+    position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;
+    background:rgba(25,11,46,.75);border:1px solid var(--line);color:var(--cream);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;
+    backdrop-filter:blur(4px);transition:background .2s;
+  }
+  .style-nav-btn:hover{background:rgba(255,111,165,.35)}
+  .style-nav-btn.prev{left:4px}
+  .style-nav-btn.next{right:4px}
+  .style-nav-btn svg{width:16px;height:16px}
+  .style-explorer-footer{
+    text-align:center;padding:6px 22px 0;color:var(--muted);font-size:13px;
+  }
+  .style-explorer-footer a{color:var(--amber);font-weight:700}
+  @media(max-width:600px){
+    .style-slide{flex:0 0 84%}
+  }
+
   /* ---------- OCCASIONS ---------- */
   .occ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
   .occ{
@@ -313,7 +372,7 @@
       </div>
       <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></svg>
-        <h3>Клип и видео (в перспективе)</h3>
+        <h3>Клип и видео</h3>
         <p>Эмоциональный ролик 1–2 минуты из фото и видео. Контраст, музыка, история — за душу.</p>
       </div>
       <div class="card reveal tilt">
@@ -366,9 +425,9 @@
       <div class="case-card reveal">
         <div class="case-media">
           <span class="case-tag-float">Видео из фото</span>
-          <video src="images/case-video.mp4" autoplay muted loop playsinline></video>
+          <video src="media/case-video.mp4" autoplay muted loop playsinline></video>
           <div class="case-source">
-            <img src="images/case-video-source.jpg" alt="Исходное фото">
+            <img src="media/case-video-source.jpg" alt="Исходное фото">
             <span>Из этого фото</span>
           </div>
         </div>
@@ -381,7 +440,7 @@
       <div class="case-card reveal">
         <div class="case-media">
           <span class="case-tag-float">Песня на заказ</span>
-          <img class="cover" src="images/case-song-cover.jpeg" alt="Только с тобой — обложка трека">
+          <img class="cover" src="media/case-song-cover.jpeg" alt="Только с тобой — обложка трека">
         </div>
         <div class="case-body">
           <h3>«Только с тобой»</h3>
@@ -397,12 +456,120 @@
               </div>
             </div>
           </div>
-          <audio id="caseAudio" src="images/case-song.mp3" preload="none"></audio>
+          <audio id="caseAudio" src="media/case-song.mp3" preload="none"></audio>
         </div>
+      </div>
+    </div>
+
+    <button class="style-trigger" id="styleTrigger" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m15.36 6.36-2.12-2.12M8.76 8.76 6.64 6.64m11.72 0-2.12 2.12M8.76 15.24l-2.12 2.12"/><circle cx="12" cy="12" r="3.5"/></svg>
+      <span>А ещё со снимком можно вот так — листайте идеи →</span>
+    </button>
+
+    <div class="style-explorer" id="styleExplorer">
+      <div class="style-explorer-inner">
+        <div class="style-track-wrap">
+          <button class="style-nav-btn prev" id="stylePrev" aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="style-track" id="styleTrack">
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#FF6FA5,#7A3CFF 60%,#2a1147)">
+              <span class="ss-icon">🎌</span>
+              <div class="ss-name">Аниме-стиль</div>
+              <div class="ss-desc">Большие выразительные глаза, яркие контуры, как из любимого аниме-сериала. Эффектно и узнаваемо.</div>
+              <span class="ss-mood">Ярко · смело</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#cfd3da,#7c8194 60%,#2b2e38)">
+              <span class="ss-icon">🏛️</span>
+              <div class="ss-name">Античная статуя</div>
+              <div class="ss-desc">Мраморная скульптура в духе греческого музея — благородная поза, драпировка ткани, драматичный свет.</div>
+              <span class="ss-mood">Элегантно · вечно</span>
+            </div>
+
+            <div class="style-slide" style="background:radial-gradient(circle at 32% 28%,#fff,#aeb3c0 32%,#15151a 85%)">
+              <span class="ss-icon">🪩</span>
+              <div class="ss-name">Диско-шар</div>
+              <div class="ss-desc">Превращение в сияющий зеркальный шар из тысяч мелких бликов. Гламурно, как на лучшей вечеринке 70-х.</div>
+              <span class="ss-mood">Блеск · вечеринка</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#FFB14E,#FF4D8D 65%,#341552)">
+              <span class="ss-icon">📼</span>
+              <div class="ss-name">Тогда / Сейчас</div>
+              <div class="ss-desc">Вы сегодня — и вы же в 1999 году, на зернистой пленке со вспышкой. Ностальгия, от которой тает сердце.</div>
+              <span class="ss-mood">Тёплая ностальгия</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#8ecbff,#3f6fff 60%,#16204f)">
+              <span class="ss-icon">🧸</span>
+              <div class="ss-name">3D-фигурка</div>
+              <div class="ss-desc">Глянцевая виниловая игрушка-коллекционка с вашим лицом — будто с витрины дорогого дизайнерского магазина.</div>
+              <span class="ss-mood">Мило · премиум</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#d9c79a,#8a6b3f 60%,#241808)">
+              <span class="ss-icon">🔮</span>
+              <div class="ss-name">Карта Таро</div>
+              <div class="ss-desc">Вы — герой собственной карты Таро в классическом мистическом стиле. Загадочно и очень личное.</div>
+              <span class="ss-mood">Магия · символы</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#ffe27a,#ff5e5e 60%,#19192e)">
+              <span class="ss-icon">💥</span>
+              <div class="ss-name">Комикс</div>
+              <div class="ss-desc">Яркие краски, жирный контур и эффект полутонов — будто страница из классического комикса 80-х.</div>
+              <span class="ss-mood">Дерзко · весело</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#ece7d8,#a39d8e 60%,#252219)">
+              <span class="ss-icon">📰</span>
+              <div class="ss-name">Винтажная газета</div>
+              <div class="ss-desc">Вы на первой полосе старинной газеты с заголовками о себе. Чёрно-белый шарм и капля абсурдного юмора.</div>
+              <span class="ss-mood">Старина · ирония</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#ffd6e8,#ff7fae 60%,#5c1f3c)">
+              <span class="ss-icon">🎨</span>
+              <div class="ss-name">Цветотип</div>
+              <div class="ss-desc">Наглядная подборка: какие цвета одежды лучше всего раскрывают именно вашу внешность. Практично и красиво.</div>
+              <span class="ss-mood">Полезно · стильно</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#c9b8ff,#7c5ce0 60%,#241a4a)">
+              <span class="ss-icon">💇</span>
+              <div class="ss-name">Подбор причёски</div>
+              <div class="ss-desc">Несколько вариантов стрижки рядом друг с другом — наглядно увидите, что подойдёт вам больше всего.</div>
+              <span class="ss-mood">Преображение</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#ffe9d6,#ff9d5e 60%,#5c2e10)">
+              <span class="ss-icon">🧁</span>
+              <div class="ss-name">Чиби-стикеры</div>
+              <div class="ss-desc">Набор милых мини-версий себя с разными эмоциями — готовый стикерпак для своего мессенджера.</div>
+              <span class="ss-mood">Мило · смешно</span>
+            </div>
+
+            <div class="style-slide" style="background:linear-gradient(155deg,#9be7ff,#3f9fd9 60%,#0c2438)">
+              <span class="ss-icon">🕹️</span>
+              <div class="ss-name">8-бит игра</div>
+              <div class="ss-desc">Вы — главный герой ретро-видеоигры в пиксельной графике, в момент победы под фанфары и салют.</div>
+              <span class="ss-mood">Игра · ностальгия</span>
+            </div>
+
+          </div>
+          <button class="style-nav-btn next" id="styleNext" aria-label="Вперёд">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="style-dots" id="styleDots"></div>
+        <p class="style-explorer-footer">Это лишь часть идей — полный каталог пришлю в <a href="https://t.me/keuqz" target="_blank" rel="noopener">Telegram</a></p>
       </div>
     </div>
   </div>
 </section>
+
 <!-- ================= OCCASIONS ================= -->
 <section id="occasions">
   <div class="wrap">
@@ -535,7 +702,7 @@
   <div class="wrap">
     <div class="logo">ИИ<b>моция</b></div>
     ИИ-подарки на заказ · Калининград · самозанятая<br>
-    © 2026 · Создаю эмоции, которые хочется пересматривать
+    © 2026 · Создаём эмоции, которые хочется пересматривать
   </div>
 </footer>
 
@@ -677,6 +844,64 @@
       const r = bar.getBoundingClientRect();
       const p = (e.clientX - r.left)/r.width;
       if(audio.duration) audio.currentTime = p*audio.duration;
+    });
+  })();
+
+  // ===== style explorer carousel =====
+  (function(){
+    const trigger = document.getElementById('styleTrigger');
+    const explorer = document.getElementById('styleExplorer');
+    const track = document.getElementById('styleTrack');
+    const prevBtn = document.getElementById('stylePrev');
+    const nextBtn = document.getElementById('styleNext');
+    const dotsBox = document.getElementById('styleDots');
+    if(!trigger || !explorer || !track) return;
+
+    const slides = Array.from(track.children);
+    slides.forEach((_, i)=>{
+      const d = document.createElement('span');
+      if(i===0) d.classList.add('active');
+      dotsBox.appendChild(d);
+    });
+    const dots = Array.from(dotsBox.children);
+
+    let opened = false;
+    trigger.addEventListener('click', ()=>{
+      opened = !opened;
+      explorer.classList.toggle('open', opened);
+      trigger.querySelector('span').textContent = opened
+        ? 'Свернуть каталог идей ↑'
+        : 'А ещё со снимком можно вот так — листайте идеи →';
+      if(opened){
+        setTimeout(()=>explorer.scrollIntoView({behavior:'smooth', block:'nearest'}), 250);
+      }
+    });
+
+    function updateActive(){
+      const trackLeft = track.scrollLeft;
+      let closest = 0, closestDist = Infinity;
+      slides.forEach((s, i)=>{
+        const dist = Math.abs(s.offsetLeft - trackLeft);
+        if(dist < closestDist){ closestDist = dist; closest = i; }
+      });
+      dots.forEach((d,i)=>d.classList.toggle('active', i===closest));
+    }
+    track.addEventListener('scroll', ()=>{
+      window.requestAnimationFrame(updateActive);
+    }, {passive:true});
+
+    function scrollByCard(dir){
+      const card = slides[0];
+      const gap = 14;
+      track.scrollBy({left: dir*(card.offsetWidth+gap), behavior:'smooth'});
+    }
+    prevBtn.addEventListener('click', ()=>scrollByCard(-1));
+    nextBtn.addEventListener('click', ()=>scrollByCard(1));
+
+    dots.forEach((d,i)=>{
+      d.addEventListener('click', ()=>{
+        track.scrollTo({left: slides[i].offsetLeft, behavior:'smooth'});
+      });
     });
   })();
 
