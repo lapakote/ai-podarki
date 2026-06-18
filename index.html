@@ -148,6 +148,13 @@
   .card .ic{width:46px;height:46px;margin-bottom:18px;color:var(--amber);transform:translateZ(20px)}
   .card h3{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:8px;transform:translateZ(15px)}
   .card p{color:var(--muted);font-size:14.5px;transform:translateZ(10px)}
+  .game-formats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .game-format-tag{
+  font-size:12px;font-weight:700;letter-spacing:.04em;
+  background:rgba(255,177,78,.1);border:1px solid rgba(255,177,78,.3);
+  color:var(--amber);border-radius:100px;padding:5px 12px;
+  display:flex;align-items:center;gap:5px;
+}
 
   /* ---------- BEFORE / AFTER ---------- */
   .ba-section{background:linear-gradient(180deg,transparent,rgba(52,21,82,.5),transparent)}
@@ -399,6 +406,20 @@
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <h3>Открытка и подкаст о жизни</h3>
         <p>Цифровая открытка, юмор с ИИ или мини-подкаст о жизни человека к юбилею.</p>
+      </div>
+      <div class="card reveal tilt">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8l3 3 2-2 3 3"/></svg>
+        <h3>Игра в подарок</h3>
+        <p>Персональная игра с именем и шутками про именинника — открывается по ссылке на любом телефоне, без установки.</p>
+        <div class="game-formats">
+          <span class="game-format-tag">🧠 Викторина про человека</span>
+          <span class="game-format-tag">🧩 Пазл-открытка</span>
+          <span class="game-format-tag">🎯 Лови подарки</span>
+          <span class="game-format-tag">📖 Квест с выборами</span>
+          <span class="game-format-tag">💌 Карточки-признания</span>
+          <span class="game-format-tag">📸 Угадай по фото</span>
+        </div>
+        <a href="game.html" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:13px;font-weight:700;color:var(--amber);text-decoration:none">Попробовать пример →</a>
       </div>
     </div>
   </div>
