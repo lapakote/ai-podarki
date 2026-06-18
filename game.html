@@ -193,8 +193,10 @@ body{
   position:fixed;top:18px;left:50%;transform:translateX(-50%);
   font-family:var(--display);font-weight:800;font-size:14px;
   color:rgba(255,243,233,.35);letter-spacing:-.01em;z-index:5;
-  white-space:nowrap;
+  white-space:nowrap;text-decoration:none;
+  transition:color .2s ease;
 }
+.game-logo:hover{color:rgba(255,243,233,.7)}
 .game-logo b{color:rgba(255,177,78,.5)}
 
 /* ---- WATERMARK ---- */
@@ -210,7 +212,7 @@ body{
 
 <div class="aurora"><i></i><i></i><i></i></div>
 <div id="confetti"></div>
-<div class="game-logo">ИИ<b>моция</b></div>
+<a href="https://lapakote.github.io/ai-podarki/" class="game-logo">ИИ<b>моция</b></a>
 
 <div class="wrap">
 
