@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Как хорошо ты знаешь Лену? 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#190B2E;
+  --card:#241040;
+  --card2:#2e1555;
+  --rose:#FF6FA5;
+  --magenta:#FF4D8D;
+  --amber:#FFB14E;
+  --gold:#FFD487;
+  --cream:#FFF3E9;
+  --muted:rgba(255,243,233,.6);
+  --green:#4DFFB4;
+  --red:#FF6B6B;
+  --line:rgba(255,243,233,.12);
+  --display:'Unbounded',sans-serif;
+  --body:'Manrope',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden}
+body{
+  font-family:var(--body);
+  background:var(--bg);
+  color:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---- AURORA BG ---- */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;border-radius:50%;filter:blur(50px);opacity:.4;mix-blend-mode:screen;animation:adrift 20s ease-in-out infinite}
+.aurora i:nth-child(1){width:420px;height:420px;left:-100px;top:-100px;background:radial-gradient(circle,var(--magenta),transparent 70%)}
+.aurora i:nth-child(2){width:380px;height:380px;right:-80px;bottom:-60px;background:radial-gradient(circle,var(--amber),transparent 70%);animation-delay:-8s}
+.aurora i:nth-child(3){width:300px;height:300px;left:40%;top:40%;background:radial-gradient(circle,#7A3CFF,transparent 70%);animation-delay:-14s}
+@keyframes adrift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.1)}}
+
+/* ---- WRAPPER ---- */
+.wrap{
+  position:relative;z-index:2;
+  width:100%;max-width:420px;
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px 20px;
+  gap:0;
+}
+
+/* ---- SCREENS ---- */
+.screen{
+  width:100%;display:none;flex-direction:column;align-items:center;gap:0;
+  animation:fadeIn .45s ease;
+}
+.screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---- START SCREEN ---- */
+.start-emoji{font-size:64px;margin-bottom:20px;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.start-title{
+  font-family:var(--display);font-weight:800;font-size:clamp(24px,6vw,32px);
+  text-align:center;line-height:1.15;margin-bottom:10px;
+}
+.start-title .name{
+  background:linear-gradient(100deg,var(--rose),var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.start-sub{color:var(--muted);font-size:15px;text-align:center;line-height:1.5;margin-bottom:32px}
+.input-label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;align-self:flex-start}
+.name-input{
+  width:100%;background:var(--card);border:1.5px solid var(--line);
+  border-radius:16px;padding:15px 18px;font-family:var(--body);font-size:17px;
+  color:var(--cream);outline:none;transition:border-color .2s;margin-bottom:24px;
+}
+.name-input::placeholder{color:var(--muted)}
+.name-input:focus{border-color:rgba(255,111,165,.6)}
+.btn{
+  width:100%;padding:17px;border-radius:100px;border:none;cursor:pointer;
+  font-family:var(--body);font-weight:700;font-size:17px;
+  background:linear-gradient(100deg,var(--magenta),var(--amber));
+  color:#2a0c1c;transition:transform .2s ease, box-shadow .2s ease;
+  box-shadow:0 0 40px rgba(255,77,141,.4);
+}
+.btn:active{transform:scale(.97)}
+.btn:hover{box-shadow:0 0 60px rgba(255,77,141,.6)}
+
+/* ---- PROGRESS ---- */
+.progress-wrap{width:100%;margin-bottom:22px}
+.progress-info{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:8px}
+.progress-bar{width:100%;height:5px;background:var(--line);border-radius:5px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--amber));border-radius:5px;transition:width .5s ease}
+
+/* ---- SCORE BADGE ---- */
+.score-badge{
+  background:var(--card);border:1px solid var(--line);border-radius:100px;
+  padding:8px 18px;font-size:13px;font-weight:700;color:var(--amber);
+  margin-bottom:22px;align-self:center;
+}
+
+/* ---- QUESTION CARD ---- */
+.q-card{
+  width:100%;background:var(--card);border:1px solid var(--line);
+  border-radius:26px;padding:26px 22px 22px;margin-bottom:20px;
+  position:relative;overflow:hidden;
+}
+.q-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--magenta),var(--amber));
+}
+.q-number{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.q-text{font-family:var(--display);font-weight:700;font-size:clamp(16px,4.5vw,20px);line-height:1.35}
+
+/* ---- ANSWERS ---- */
+.answers{width:100%;display:flex;flex-direction:column;gap:10px}
+.ans-btn{
+  width:100%;background:var(--card2);border:1.5px solid var(--line);
+  border-radius:16px;padding:15px 18px;
+  font-family:var(--body);font-size:15.5px;font-weight:600;
+  color:var(--cream);text-align:left;cursor:pointer;
+  transition:transform .15s ease, border-color .2s, background .2s;
+  display:flex;align-items:center;gap:12px;
+}
+.ans-btn:active{transform:scale(.98)}
+.ans-btn:not(.locked):hover{border-color:rgba(255,111,165,.5);background:rgba(255,111,165,.08)}
+.ans-btn.correct{border-color:var(--green);background:rgba(77,255,180,.12);color:var(--green)}
+.ans-btn.wrong{border-color:var(--red);background:rgba(255,107,107,.12);color:var(--red)}
+.ans-btn.dimmed{opacity:.38}
+.ans-icon{font-size:18px;flex-shrink:0}
+.ans-letter{
+  width:28px;height:28px;border-radius:50%;background:rgba(255,243,233,.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;
+}
+.ans-btn.correct .ans-letter{background:var(--green);color:#0a2e1e}
+.ans-btn.wrong .ans-letter{background:var(--red);color:#2e0a0a}
+
+/* ---- FEEDBACK ---- */
+.feedback{
+  width:100%;text-align:center;padding:14px 18px;border-radius:16px;
+  font-size:14.5px;line-height:1.5;margin-top:6px;
+  opacity:0;transition:opacity .3s ease;
+}
+.feedback.show{opacity:1}
+.feedback.correct{background:rgba(77,255,180,.1);border:1px solid rgba(77,255,180,.3);color:var(--green)}
+.feedback.wrong{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);color:#ffaaaa}
+
+/* ---- CONFETTI ---- */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:10;overflow:hidden}
+.conf-piece{position:absolute;font-size:22px;animation:confFall linear forwards}
+@keyframes confFall{
+  0%{transform:translateY(-30px) rotate(0deg) scale(1);opacity:1}
+  80%{opacity:1}
+  100%{transform:translateY(110svh) rotate(720deg) scale(.5);opacity:0}
+}
+
+/* ---- FINAL SCREEN ---- */
+.final-emoji{font-size:72px;margin-bottom:18px;animation:pop .5s cubic-bezier(.2,.8,.2,1.4)}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.final-title{font-family:var(--display);font-weight:800;font-size:clamp(22px,5.5vw,28px);text-align:center;margin-bottom:6px}
+.final-score{
+  font-family:var(--display);font-weight:800;font-size:clamp(46px,12vw,64px);
+  background:linear-gradient(100deg,var(--rose),var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;margin:16px 0 4px;
+}
+.final-max{color:var(--muted);font-size:15px;margin-bottom:18px}
+.verdict-card{
+  width:100%;background:var(--card);border:1px solid var(--line);
+  border-radius:20px;padding:20px;text-align:center;margin-bottom:26px;
+}
+.verdict-text{font-size:15px;line-height:1.6;color:var(--cream)}
+.verdict-player{font-weight:700;color:var(--amber)}
+.btn-outline{
+  width:100%;padding:15px;border-radius:100px;
+  border:1.5px solid var(--line);background:transparent;
+  font-family:var(--body);font-weight:700;font-size:15.5px;
+  color:var(--cream);cursor:pointer;margin-top:10px;
+  transition:border-color .2s;
+}
+.btn-outline:hover{border-color:var(--rose)}
+
+/* ---- LOGO ---- */
+.game-logo{
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);
+  font-family:var(--display);font-weight:800;font-size:14px;
+  color:rgba(255,243,233,.35);letter-spacing:-.01em;z-index:5;
+  white-space:nowrap;
+}
+.game-logo b{color:rgba(255,177,78,.5)}
+
+/* ---- WATERMARK ---- */
+.watermark{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  font-size:11.5px;color:rgba(255,243,233,.28);z-index:5;white-space:nowrap;
+  letter-spacing:.04em;
+}
+.watermark b{color:rgba(255,177,78,.45)}
+</style>
+</head>
+<body>
+
+<div class="aurora"><i></i><i></i><i></i></div>
+<div id="confetti"></div>
+<div class="game-logo">ИИ<b>моция</b></div>
+
+<div class="wrap">
+
+  <!-- ===== START ===== -->
+  <div class="screen active" id="screenStart">
+    <div class="start-emoji">🎉</div>
+    <div class="start-title">Как хорошо ты знаешь<br><span class="name">Лену?</span></div>
+    <p class="start-sub">7 вопросов про человека, которого все (думают, что) знают. Проверим!</p>
+    <div class="input-label">Как тебя зовут?</div>
+    <input class="name-input" id="playerName" type="text" placeholder="Введи своё имя" maxlength="24" autocomplete="off">
+    <button class="btn" onclick="startGame()">Погнали! →</button>
+  </div>
+
+  <!-- ===== QUESTION ===== -->
+  <div class="screen" id="screenQ">
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span id="qLabel">Вопрос 1 из 7</span>
+        <span id="qEmoji">🧠</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+
+    <div class="score-badge">⭐ Очков: <span id="scoreLive">0</span></div>
+
+    <div class="q-card">
+      <div class="q-number" id="qNumber">Вопрос 1</div>
+      <div class="q-text" id="qText"></div>
+    </div>
+
+    <div class="answers" id="answers"></div>
+    <div class="feedback" id="feedback"></div>
+  </div>
+
+  <!-- ===== FINAL ===== -->
+  <div class="screen" id="screenFinal">
+    <div class="final-emoji" id="finalEmoji">🏆</div>
+    <div class="final-title" id="finalTitle">Результат</div>
+    <div class="final-score" id="finalScore">0</div>
+    <div class="final-max" id="finalMax">из 7</div>
+    <div class="verdict-card">
+      <div class="verdict-text" id="verdictText"></div>
+    </div>
+    <button class="btn" onclick="shareResult()">Поделиться результатом 📤</button>
+    <button class="btn-outline" onclick="restartGame()">Сыграть ещё раз</button>
+  </div>
+
+</div>
+
+<div class="watermark">Подарок сделан с ❤️ в <b>ИИмоция</b></div>
+
+<script>
+// ===== ДАННЫЕ ИГРЫ — ЭТО МЕНЯЕТСЯ ПОД КАЖДОГО ЧЕЛОВЕКА =====
+const GAME = {
+  subject: "Лену",         // имя в родительном падеже
+  subjectNom: "Лена",     // имя в именительном падеже
+  occasion: "с днём рождения! 🎂",
+  questions: [
+    {
+      text: "Какой город является любимым городом Лены?",
+      answers: ["Москва", "Калининград", "Стамбул", "Барселона"],
+      correct: 1,
+      hint: "Она говорит, что нигде нет такого балтийского воздуха ☁️"
+    },
+    {
+      text: "Без чего Лена не может начать утро?",
+      answers: ["Без кофе", "Без зарядки", "Без соцсетей", "Без музыки"],
+      correct: 0,
+      hint: "Кофемашина — её лучший друг с 7 утра ☕"
+    },
+    {
+      text: "Какое животное Лена считает своим тотемом?",
+      answers: ["Кошка", "Волк", "Лиса", "Сова"],
+      correct: 2,
+      hint: "Хитрая, красивая и всегда знает, чего хочет 🦊"
+    },
+    {
+      text: "Что Лена делает, когда злится и хочет успокоиться?",
+      answers: ["Идёт гулять", "Убирает дома", "Смотрит сериал", "Звонит подруге"],
+      correct: 1,
+      hint: "Беспорядок раздражает её ещё больше, чем сама причина злости 🧹"
+    },
+    {
+      text: "Если бы Лена могла переехать в другую страну — куда?",
+      answers: ["Италия", "Япония", "Португалия", "Грузия"],
+      correct: 2,
+      hint: "Тихий океан, пастель и Атлантика — это её эстетика 🌊"
+    },
+    {
+      text: "Какое слово чаще всего слышат от Лены её друзья?",
+      answers: ["«Погнали!»", "«Я не знаю»", "«Серьёзно?!»", "«Ладно, окей»"],
+      correct: 0,
+      hint: "Она всегда первой предлагает что-нибудь авантюрное 🚀"
+    },
+    {
+      text: "Что Лена точно не будет делать в выходной день?",
+      answers: ["Валяться до обеда", "Идти на рынок в 8 утра", "Смотреть спорт", "Читать инструкцию"],
+      correct: 2,
+      hint: "Счёт и правила ей неинтересны, она про людей и атмосферу ⚽❌"
+    }
+  ]
+};
+
+// ===== ЛОГИКА =====
+let current = 0;
+let score = 0;
+let playerName = "";
+let locked = false;
+
+const letters = ["А","Б","В","Г"];
+const emojis = ["🤔","💭","🧐","🤯","😅","🙀","⚡"];
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function startGame(){
+  playerName = document.getElementById("playerName").value.trim() || "Гость";
+  current = 0; score = 0;
+  document.getElementById("scoreLive").textContent = 0;
+  show("screenQ");
+  renderQuestion();
+}
+
+function renderQuestion(){
+  locked = false;
+  const q = GAME.questions[current];
+  const total = GAME.questions.length;
+
+  document.getElementById("qLabel").textContent = `Вопрос ${current+1} из ${total}`;
+  document.getElementById("qEmoji").textContent = emojis[current] || "🧠";
+  document.getElementById("qNumber").textContent = `Вопрос ${current+1}`;
+  document.getElementById("qText").textContent = q.text;
+  document.getElementById("progressFill").style.width = `${(current/total)*100}%`;
+
+  const fb = document.getElementById("feedback");
+  fb.className = "feedback";
+  fb.textContent = "";
+
+  const box = document.getElementById("answers");
+  box.innerHTML = "";
+  q.answers.forEach((a, i) => {
+    const btn = document.createElement("button");
+    btn.className = "ans-btn";
+    btn.innerHTML = `<span class="ans-letter">${letters[i]}</span>${a}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    box.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx, btn){
+  if(locked) return;
+  locked = true;
+
+  const q = GAME.questions[current];
+  const allBtns = document.querySelectorAll(".ans-btn");
+  const fb = document.getElementById("feedback");
+
+  allBtns.forEach(b => b.classList.add("locked"));
+
+  if(idx === q.correct){
+    score++;
+    btn.classList.add("correct");
+    btn.querySelector(".ans-letter").textContent = "✓";
+    allBtns.forEach((b,i) => { if(i !== idx) b.classList.add("dimmed"); });
+    fb.className = "feedback correct show";
+    fb.innerHTML = `✦ ${q.hint}`;
+    document.getElementById("scoreLive").textContent = score;
+    launchConfetti();
+  } else {
+    btn.classList.add("wrong");
+    btn.querySelector(".ans-letter").textContent = "✗";
+    allBtns[q.correct].classList.add("correct");
+    allBtns[q.correct].querySelector(".ans-letter").textContent = "✓";
+    allBtns.forEach((b,i) => { if(i !== idx && i !== q.correct) b.classList.add("dimmed"); });
+    fb.className = "feedback wrong show";
+    fb.innerHTML = `${q.hint}`;
+  }
+
+  setTimeout(() => {
+    current++;
+    if(current < GAME.questions.length){
+      renderQuestion();
+    } else {
+      showFinal();
+    }
+  }, 2200);
+}
+
+function showFinal(){
+  const total = GAME.questions.length;
+  const pct = score / total;
+  let emoji, title, verdict;
+
+  if(pct === 1){
+    emoji = "🏆"; title = "Легенда!";
+    verdict = `<span class="verdict-player">${playerName}</span>, ты знаешь ${GAME.subjectNom} лучше, чем она сама себя! Это настоящая дружба — такое не купишь.`;
+  } else if(pct >= 0.71){
+    emoji = "🌟"; title = "Почти телепат";
+    verdict = `<span class="verdict-player">${playerName}</span>, ты явно проводишь с ${GAME.subject} немало времени. Пара моментов удивила — но это же хорошо, значит она ещё умеет удивлять 😄`;
+  } else if(pct >= 0.43){
+    emoji = "😅"; title = "Есть куда расти!";
+    verdict = `<span class="verdict-player">${playerName}</span>, неплохо — но ${GAME.subjectNom} точно есть чем тебя удивить. Может, пора поговорить по душам за чашкой кофе?`;
+  } else {
+    emoji = "🤷"; title = "Зато честно!";
+    verdict = `<span class="verdict-player">${playerName}</span>, кажется, появился повод поближе познакомиться с ${GAME.subject}. Она интересная, поверь 😉`;
+  }
+
+  document.getElementById("finalEmoji").textContent = emoji;
+  document.getElementById("finalTitle").textContent = title;
+  document.getElementById("finalScore").textContent = score;
+  document.getElementById("finalMax").textContent = `из ${total} правильных ответов`;
+  document.getElementById("verdictText").innerHTML = verdict;
+
+  if(pct === 1) launchConfetti(40);
+
+  show("screenFinal");
+}
+
+function shareResult(){
+  const total = GAME.questions.length;
+  const text = `Я знаю ${GAME.subject} на ${score} из ${total}! 🎉 А ты? → ИИмоция`;
+  if(navigator.share){
+    navigator.share({ text }).catch(()=>{ copyToClipboard(text); });
+  } else {
+    copyToClipboard(text);
+  }
+}
+
+function copyToClipboard(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>{ showCopyToast(); }).catch(()=>{ showCopyToast(); });
+  } else {
+    const el = document.createElement("textarea");
+    el.value = text; el.style.position="fixed"; el.style.opacity="0";
+    document.body.appendChild(el); el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    showCopyToast();
+  }
+}
+
+function showCopyToast(){
+  const t = document.createElement("div");
+  t.textContent = "✓ Скопировано — вставь в любой чат!";
+  t.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+    background:#241040;border:1px solid rgba(255,177,78,.4);color:#FFD487;
+    padding:12px 22px;border-radius:100px;font-size:14px;font-weight:700;
+    z-index:99;white-space:nowrap;animation:fadeIn .3s ease`;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2800);
+}
+
+function restartGame(){
+  current = 0; score = 0;
+  document.getElementById("scoreLive").textContent = 0;
+  show("screenStart");
+}
+
+// ===== КОНФЕТТИ =====
+const confEmojis = ["✨","🌟","💫","⭐","🎉","🎊","💛","🩷","🟡","🔥"];
+function launchConfetti(count=18){
+  const box = document.getElementById("confetti");
+  for(let i=0;i<count;i++){
+    setTimeout(()=>{
+      const el = document.createElement("div");
+      el.className = "conf-piece";
+      el.textContent = confEmojis[Math.floor(Math.random()*confEmojis.length)];
+      el.style.left = (Math.random()*100)+"vw";
+      el.style.animationDuration = (1.4+Math.random()*1.4)+"s";
+      el.style.animationDelay = (Math.random()*0.5)+"s";
+      el.style.fontSize = (16+Math.random()*16)+"px";
+      box.appendChild(el);
+      setTimeout(()=>el.remove(), 3000);
+    }, i*60);
+  }
+}
+
+// Enter в поле ввода
+document.getElementById("playerName").addEventListener("keydown", e=>{
+  if(e.key==="Enter") startGame();
+});
+</script>
+</body>
+</html>
