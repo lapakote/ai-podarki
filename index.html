@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <!--
   © 2026 Никитина Д.Д. Все тексты, дизайн и концепция сайта являются авторской работой.
-  Создано: 15.06.2026. Репозиторий лежит на GitHub.
+  Создано: 15.06.2026. Обновлено: 22.09.2026 (печатные подарки, календарь «от ДР до ДР», конструктор заявки, FAQ).
   Копирование контента и дизайна без согласия автора не допускается.
 -->
 <html lang="ru">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="yandex-verification" content="8458a91dac99afc5" />
 <link rel="icon" href="favicon_(1).ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="favicon-180.png"><meta charset="UTF-8"><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ИИмоция · ИИ-подарки на заказ</title>
-<meta name="description" content="ИИмоция — персональные подарки, созданные нейросетями: песни, клипы, фотокниги, игры и обработка фото. Эмоции, которые запоминают. Калининград, от 200 ₽.">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<title>ИИмоция · ИИ-подарки на заказ в Калининграде: цифровые и печатные</title>
+<meta name="description" content="ИИмоция — персональные подарки, созданные нейросетями: песни, клипы, фотокниги, игры, обработка фото и печатные подарки — календарь от дня рождения до дня рождения, кружки, пазлы, холсты, футболки. Калининград, от 200 ₽.">
+<link rel="canonical" href="https://lapakote.github.io/ai-podarki/">
 
 <!-- Open Graph (превью при шаринге в Telegram, WhatsApp, VK) -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="ИИмоция · ИИ-подарки на заказ">
-<meta property="og:description" content="Песни, клипы, фотокниги и игры, созданные нейросетями по вашей истории. Подарок, который хочется пересматривать.">
+<meta property="og:description" content="Песни, клипы, фотокниги, игры и печатные подарки, созданные нейросетями по вашей истории. Подарок, который хочется пересматривать.">
 <meta property="og:image" content="https://lapakote.github.io/ai-podarki/images/og-cover.jpg">
 <meta property="og:url" content="https://lapakote.github.io/ai-podarki/">
 <meta property="og:site_name" content="ИИмоция">
+<meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Структурированные данные для поиска и ИИ -->
@@ -28,14 +31,15 @@
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "ИИмоция",
-  "description": "Персональные подарки, созданные с помощью нейросетей: песни, клипы, фотокниги, игры, обработка фото.",
+  "description": "Персональные подарки, созданные с помощью нейросетей: песни, клипы, фотокниги, игры, обработка фото, а также печатные подарки — календари от дня рождения до дня рождения, кружки, пазлы, холсты, футболки, стикерпаки.",
   "url": "https://lapakote.github.io/ai-podarki/",
   "areaServed": "Калининград",
   "priceRange": "от 200 ₽",
   "founder": "Никитина Д.Д.",
+  "email": "mariamarch1426@gmail.com",
   "sameAs": ["https://t.me/keuqz"]
 }
-</script>  
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
@@ -68,6 +72,7 @@
   }
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
+  a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
 
   .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
   .eyebrow{
@@ -140,7 +145,6 @@
     background:linear-gradient(100deg,var(--rose),var(--amber));
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  /* word-reveal animation for hero title */
   .hero h1 .word{display:inline-block;opacity:0;filter:blur(6px);transform:translateY(18px) scale(.96);animation:wordIn .7s cubic-bezier(.2,.8,.2,1) forwards}
   @keyframes wordIn{to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
 
@@ -149,7 +153,6 @@
   .hero-note{margin-top:26px;font-size:13px;color:var(--muted);letter-spacing:.02em;opacity:0;animation:fadeUp .8s ease forwards;animation-delay:1.4s}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-  /* cursor sparkle trail */
   #cursorTrail{position:fixed;inset:0;z-index:50;pointer-events:none}
   #cursorTrail span{
     position:absolute;width:6px;height:6px;border-radius:50%;
@@ -163,6 +166,16 @@
     100%{opacity:0;transform:translate(-50%,-50%) scale(.2) translateY(-18px)}
   }
 
+  /* ---------- NEW YEAR STRIP ---------- */
+  .ny-strip{
+    position:relative;z-index:4;
+    background:linear-gradient(100deg,rgba(255,77,141,.16),rgba(255,177,78,.16));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:14px 24px;font-size:14.5px;text-align:center;
+  }
+  .ny-strip b{color:var(--gold)}
+  .ny-strip a{color:var(--amber);font-weight:700;text-decoration:underline;text-underline-offset:3px;margin-left:6px;white-space:nowrap}
+
   /* ---------- SERVICES (3D tilt cards) ---------- */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px;perspective:1000px}
   .card{
@@ -174,13 +187,16 @@
   .card .ic{width:46px;height:46px;margin-bottom:18px;color:var(--amber);transform:translateZ(20px)}
   .card h3{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:8px;transform:translateZ(15px)}
   .card p{color:var(--muted);font-size:14.5px;transform:translateZ(10px)}
+  .card .new{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;color:#2a0c1c;background:var(--gold);border-radius:100px;padding:2px 9px;margin-left:8px;vertical-align:middle;font-family:var(--body)}
+  .card.wide{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:6px 28px;align-items:start}
+  .card.wide .ic{grid-row:span 4}
   .game-formats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .game-format-tag{
-  font-size:12px;font-weight:700;letter-spacing:.04em;
-  background:rgba(255,177,78,.1);border:1px solid rgba(255,177,78,.3);
-  color:var(--amber);border-radius:100px;padding:5px 12px;
-  display:flex;align-items:center;gap:5px;
-}
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+    background:rgba(255,177,78,.1);border:1px solid rgba(255,177,78,.3);
+    color:var(--amber);border-radius:100px;padding:5px 12px;
+    display:flex;align-items:center;gap:5px;
+  }
 
   /* ---------- BEFORE / AFTER ---------- */
   .ba-section{background:linear-gradient(180deg,transparent,rgba(52,21,82,.5),transparent)}
@@ -193,13 +209,10 @@
   .ba .before{background:linear-gradient(160deg,#4a4658,#2c2a36)}
   .ba .after{background:linear-gradient(150deg,var(--magenta),#7A3CFF 55%,var(--amber));clip-path:inset(0 0 0 50%)}
   .ba .after .sparkle{position:absolute;color:rgba(255,255,255,.85);font-size:20px;animation:twinkle 2.6s infinite}
-  .ba .face{width:88px;height:88px;border-radius:50%;border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center}
-  .ba .face svg{width:50px;height:50px;opacity:.85}
   .ba .tag{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;background:rgba(0,0,0,.35);padding:7px 16px;border-radius:100px}
   .ba .handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--cream);transform:translateX(-50%);z-index:4;box-shadow:0 0 18px rgba(255,255,255,.6)}
   .ba .handle::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:40px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(255,212,135,.55),transparent);filter:blur(6px)}
   .ba .knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--cream);color:#341552;display:flex;align-items:center;justify-content:center;z-index:5;cursor:ew-resize;box-shadow:0 4px 20px rgba(0,0,0,.4);font-size:18px;font-weight:700}
-  .ba-cap{text-align:center;color:var(--muted);font-size:13.5px;margin-top:18px}
 
   /* ---------- MORE CASES (video + audio) ---------- */
   .cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px;align-items:stretch}
@@ -227,7 +240,7 @@
   .audio-progress{position:relative;height:3px;background:var(--line);border-radius:3px;margin-top:6px;cursor:pointer}
   .audio-progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,var(--rose),var(--amber));border-radius:3px}
 
-  /* ---------- STYLE EXPLORER (compact carousel, linked to the BA example) ---------- */
+  /* ---------- STYLE EXPLORER ---------- */
   .style-trigger{
     margin:34px auto 0;display:flex;align-items:center;justify-content:center;gap:10px;
     background:rgba(255,177,78,.08);border:1px solid rgba(255,177,78,.35);
@@ -237,16 +250,12 @@
   }
   .style-trigger:hover{transform:translateY(-2px);background:rgba(255,177,78,.16)}
   .style-trigger svg{width:17px;height:17px;color:var(--amber)}
-
   .style-explorer{
     max-width:560px;margin:18px auto 0;overflow:hidden;
     max-height:0;opacity:0;transition:max-height .5s cubic-bezier(.2,.8,.2,1),opacity .4s ease;
   }
   .style-explorer.open{max-height:600px;opacity:1}
-  .style-explorer-inner{
-    border:1px solid var(--line);border-radius:24px;background:var(--card);
-    padding:22px 0 18px;
-  }
+  .style-explorer-inner{border:1px solid var(--line);border-radius:24px;background:var(--card);padding:22px 0 18px}
   .style-track-wrap{position:relative;padding:0 18px}
   .style-track{
     display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
@@ -256,7 +265,7 @@
   .style-slide{
     scroll-snap-align:start;flex:0 0 76%;border-radius:18px;padding:22px 20px;
     display:flex;flex-direction:column;gap:10px;color:#fff;position:relative;overflow:hidden;
-    min-height:190px;
+    min-height:190px;text-align:left;
   }
   .style-slide .ss-icon{font-size:30px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.35))}
   .style-slide .ss-name{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.2}
@@ -266,7 +275,7 @@
     background:rgba(0,0,0,.28);padding:5px 12px;border-radius:100px;font-weight:700;
   }
   .style-dots{display:flex;justify-content:center;gap:6px;margin-top:6px}
-  .style-dots span{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .25s,transform .25s}
+  .style-dots span{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .25s,transform .25s;cursor:pointer}
   .style-dots span.active{background:var(--amber);transform:scale(1.3)}
   .style-nav-btn{
     position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;
@@ -278,13 +287,67 @@
   .style-nav-btn.prev{left:4px}
   .style-nav-btn.next{right:4px}
   .style-nav-btn svg{width:16px;height:16px}
-  .style-explorer-footer{
-    text-align:center;padding:6px 22px 0;color:var(--muted);font-size:13px;
-  }
+  .style-explorer-footer{text-align:center;padding:6px 22px 0;color:var(--muted);font-size:13px}
   .style-explorer-footer a{color:var(--amber);font-weight:700}
-  @media(max-width:600px){
-    .style-slide{flex:0 0 84%}
+  @media(max-width:600px){.style-slide{flex:0 0 84%}}
+
+  /* ---------- PRINT: birthday calendar ---------- */
+  .print-section{background:linear-gradient(180deg,transparent,rgba(255,177,78,.05) 40%,transparent)}
+  .bday{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;margin-top:50px;
+    padding:38px;border-radius:30px;
+    background:linear-gradient(160deg,rgba(255,177,78,.13),rgba(255,77,141,.08));
+    border:1px solid rgba(255,177,78,.38);
   }
+  .bday .badge{display:inline-block;font-size:12px;font-weight:700;color:#2a0c1c;background:var(--gold);border-radius:100px;padding:4px 12px;margin-bottom:14px}
+  .bday h3{font-family:var(--display);font-weight:800;font-size:clamp(22px,3vw,32px);line-height:1.15;margin-bottom:14px}
+  .bday p{color:var(--muted);margin-bottom:16px;font-size:15.5px}
+  .bday ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 22px}
+  .bday li{display:flex;gap:10px;font-size:14.5px;color:rgba(255,243,233,.88)}
+  .bday li::before{content:"✦";color:var(--amber);flex-shrink:0}
+  .bday-price{font-family:var(--display);font-weight:800;font-size:24px;margin-bottom:4px}
+  .bday-price small{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted)}
+  .bday-formats{font-size:13.5px;color:var(--muted);margin-bottom:22px}
+  .bday-demo{background:rgba(25,11,46,.7);border:1px solid var(--line);border-radius:22px;padding:24px}
+  .bday-demo label{font-size:13px;color:var(--muted);display:block;margin-bottom:8px;font-weight:600}
+  .bday-out{margin:16px 0 14px;font-size:14px;min-height:44px}
+  .bday-out b{color:var(--gold)}
+  .months{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .month{border:1px solid var(--line);border-radius:12px;padding:9px 6px;text-align:center;font-size:12.5px;background:var(--card);line-height:1.3}
+  .month .m{font-weight:700;display:block}
+  .month .y{color:var(--muted);font-size:11px}
+  .month.bd{background:linear-gradient(140deg,var(--magenta),var(--amber));color:#2a0c1c;border-color:transparent}
+  .month.bd .y{color:rgba(42,12,28,.75)}
+  .month.final{grid-column:1/-1;border-style:dashed;border-color:rgba(255,177,78,.5)}
+
+  /* shared form fields */
+  .field{
+    width:100%;background:rgba(255,243,233,.06);border:1px solid var(--line);border-radius:14px;
+    padding:12px 14px;color:var(--cream);font:inherit;font-size:15px;color-scheme:dark;
+  }
+  .field:focus{outline:2px solid var(--rose);outline-offset:1px;border-color:transparent}
+  select.field option{background:var(--night-2);color:var(--cream)}
+  textarea.field{min-height:92px;resize:vertical}
+
+  /* ---------- PRINT: product grid ---------- */
+  .print-head{margin-top:80px}
+  .print-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+  .pcard{
+    background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 22px;
+    display:flex;flex-direction:column;gap:8px;transition:border-color .3s ease,background .3s ease;
+  }
+  .pcard:hover{border-color:rgba(255,177,78,.45);background:rgba(255,177,78,.04)}
+  .pcard .emoji{font-size:28px;line-height:1}
+  .pcard h3{font-family:var(--display);font-weight:600;font-size:16.5px;line-height:1.25}
+  .pcard p{color:var(--muted);font-size:14px}
+  .pcard .on{font-size:12.5px;color:var(--gold);margin-top:auto;padding-top:6px}
+  .pick{font-size:13px;font-weight:700;color:var(--amber);align-self:flex-start}
+  .pick:hover{text-decoration:underline;text-underline-offset:3px}
+
+  .modes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .mode{border:1px dashed rgba(255,177,78,.45);border-radius:20px;padding:22px 24px}
+  .mode b{font-family:var(--display);font-weight:600;font-size:16px;display:block;margin-bottom:6px}
+  .mode p{color:var(--muted);font-size:14px}
 
   /* ---------- OCCASIONS ---------- */
   .occ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
@@ -316,19 +379,37 @@
   .plan ul{list-style:none;margin:22px 0 28px;display:flex;flex-direction:column;gap:12px}
   .plan li{display:flex;gap:11px;font-size:14.5px;color:rgba(255,243,233,.85)}
   .plan li svg{flex-shrink:0;width:18px;height:18px;color:var(--amber);margin-top:3px}
+  .plan li a{color:var(--amber);text-decoration:underline;text-underline-offset:3px}
   .plan .btn{margin-top:auto;justify-content:center}
+  .print-prices{
+    margin-top:20px;border:1px solid rgba(255,177,78,.35);border-radius:24px;padding:28px 30px;
+    display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:26px;align-items:center;
+    background:linear-gradient(120deg,rgba(255,177,78,.08),rgba(255,77,141,.05));
+  }
+  .print-prices h3{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.2}
+  .print-prices h3 small{display:block;font-family:var(--body);font-size:13.5px;font-weight:500;color:var(--muted);margin-top:6px}
+  .pp b{display:block;font-family:var(--display);font-weight:800;font-size:22px;margin-bottom:2px}
+  .pp span{color:var(--muted);font-size:13.5px;line-height:1.45;display:block}
   .price-note{text-align:center;color:var(--muted);font-size:13.5px;margin-top:28px}
 
   /* ---------- ABOUT ---------- */
   .about{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center}
   .about-photo{aspect-ratio:1;border-radius:28px;background:linear-gradient(150deg,var(--magenta),#7A3CFF 60%,var(--amber));position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--glow)}
-  .about-photo .halo{font-size:80px;filter:drop-shadow(0 0 20px rgba(255,255,255,.4))}
-  .about-photo .ph{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.05em}
   .about h2{margin-bottom:20px}
   .about p{color:var(--muted);margin-bottom:16px;font-size:16px}
   .about p strong{color:var(--cream)}
 
-  /* ---------- CTA ---------- */
+  /* ---------- FAQ ---------- */
+  .faq{max-width:820px;margin:40px auto 0;display:flex;flex-direction:column;gap:10px}
+  .faq details{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:0 22px;transition:border-color .25s}
+  .faq details[open]{border-color:rgba(255,177,78,.4)}
+  .faq summary{cursor:pointer;list-style:none;padding:18px 34px 18px 0;font-weight:700;font-size:16px;position:relative}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";position:absolute;right:0;top:12px;font-size:24px;font-weight:500;color:var(--amber);transition:transform .25s}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{color:var(--muted);padding:0 0 18px;font-size:15px}
+
+  /* ---------- CTA + ORDER BUILDER ---------- */
   .final{text-align:center}
   .final h2{margin-bottom:18px;max-width:760px;margin-left:auto;margin-right:auto}
   .final .lead{margin:0 auto 34px}
@@ -337,18 +418,64 @@
   .socials a:hover{border-color:var(--rose);transform:translateY(-3px);color:var(--rose)}
   .socials svg{width:19px;height:19px}
 
+  .order{
+    max-width:780px;margin:0 auto 34px;text-align:left;background:var(--card);
+    border:1px solid var(--line);border-radius:28px;padding:32px;
+  }
+  .order h3{font-family:var(--display);font-weight:600;font-size:20px;margin-bottom:6px}
+  .order > p{color:var(--muted);font-size:14.5px;margin-bottom:24px}
+  .order .row{margin-bottom:18px}
+  .order .lbl{font-size:13px;color:var(--muted);margin-bottom:8px;display:block;font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:100px;
+    border:1px solid var(--line);background:transparent;color:var(--cream);cursor:pointer;
+    transition:background .2s,border-color .2s,color .2s;
+  }
+  .chip:hover{border-color:var(--rose)}
+  .chip.on{background:linear-gradient(100deg,var(--magenta),var(--amber));color:#2a0c1c;border-color:transparent}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .order-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .order-hint{font-size:13px;color:var(--muted);margin-top:14px}
+  .or-line{color:var(--muted);font-size:14px;margin-bottom:16px}
+
+  .toast{
+    position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--cream);color:#341552;
+    padding:14px 20px;border-radius:14px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;
+    transition:opacity .3s,transform .3s;z-index:100;max-width:92vw;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.4);
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  .fab{
+    display:none;position:fixed;right:16px;bottom:16px;z-index:60;align-items:center;gap:8px;
+    background:linear-gradient(100deg,var(--magenta),var(--amber));color:#2a0c1c;font-weight:700;font-size:14.5px;
+    padding:13px 20px;border-radius:100px;box-shadow:0 8px 30px rgba(255,77,141,.45);transition:opacity .3s,transform .3s;
+  }
+  .fab.hide{opacity:0;transform:translateY(20px);pointer-events:none}
+
   footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:13.5px}
   footer .logo{margin-bottom:10px;font-size:17px}
 
-  /* reveal */
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
 
+  @media(max-width:1000px){
+    .print-prices{grid-template-columns:1fr 1fr}
+  }
   @media(max-width:880px){
-    .grid,.steps,.price-grid,.cases-grid{grid-template-columns:1fr}
+    .grid,.steps,.price-grid,.cases-grid,.bday,.modes{grid-template-columns:1fr}
+    .print-grid{grid-template-columns:1fr 1fr}
     .occ-grid{grid-template-columns:repeat(2,1fr)}
     .about{grid-template-columns:1fr}
     .nav-links{display:none}
+    .card.wide{display:block}
+    .bday{padding:26px 22px}
+    .fab{display:inline-flex}
+  }
+  @media(max-width:600px){
+    .print-grid,.print-prices,.two{grid-template-columns:1fr}
+    .order{padding:24px 18px}
+    .months{grid-template-columns:repeat(3,1fr)}
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -376,8 +503,9 @@
       <div class="logo">ИИ<b>моция</b></div>
       <div class="nav-links">
         <a href="#services">Что создаю</a>
-        <a href="#how">Как это работает</a>
+        <a href="#print">Печатные подарки</a>
         <a href="#prices">Цены</a>
+        <a href="#faq">Вопросы</a>
         <a href="#contact">Связаться</a>
       </div>
     </div>
@@ -387,16 +515,20 @@
     <div class="hero-inner">
       <span class="eyebrow">ИИ-подарки на заказ</span>
       <h1 id="heroTitle">Превратите истории в подарки</h1>
-      <!--<h1 id="heroTitle">Подарите <span class="accent">эмоции</span>,<br>а не очередную вещь</h1>-->
-      <p class="lead">Песня, клип, фотокнига или история любви, созданные нейросетями по вашей истории. Подарок, который заставит улыбнуться, прослезиться и пересматривать снова — особенно если вы далеко друг от друга.</p>
+      <p class="lead">Песня, клип, фотокнига или история любви, созданные нейросетями по вашей истории. А ещё — настоящие подарки в руки: календарь, кружка, пазл, холст. Подарок, который заставит улыбнуться, прослезиться и пересматривать снова.</p>
       <div class="hero-cta">
         <span class="magnetic"><a href="#contact" class="btn btn-primary">Заказать подарок →</a></span>
         <span class="magnetic"><a href="#examples" class="btn btn-ghost">Посмотреть примеры</a></span>
       </div>
-      <p class="hero-note">Старт от 200 ₽</p>
+      <p class="hero-note">Старт от 200 ₽ · цифровые и печатные подарки · Калининград и онлайн</p>
     </div>
   </div>
 </header>
+
+<div class="ny-strip" id="nyStrip">
+  🎄 До Нового года <b id="nyDays">100 дней</b> — принимаю предзаказы на календари 2027 и подарки коллегам. Ближе к празднику сроки растут.
+  <a href="#contact" data-pick="Подарок к Новому году">Забронировать</a>
+</div>
 
 <!-- ================= SERVICES ================= -->
 <section id="services">
@@ -417,7 +549,7 @@
       <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h13l3 3v13H4z"/><path d="M9 4v16M4 9h16"/></svg>
         <h3>Фотокнига и журнал</h3>
-        <p>Готовый макет — останется только распечатать в типографии. Журнал «о звезде» из ваших фото.</p>
+        <p>Готовый макет или сразу печатная книга. Журнал «о звезде» из ваших фото — с обложкой и интервью.</p>
       </div>
       <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.2-4.6-9.9-9.1C.5 7.8 2 4.5 5.4 4c2.2-.3 3.9 1 4.9 2.7.3.5.6 1 .9 1.5.3-.5.6-1 .9-1.5C12.1 5 13.8 3.7 16 4c3.4.5 4.9 3.8 3.3 7.4-2.7 4.5-9.9 9.1-9.9 9.1z"/></svg>
@@ -426,8 +558,8 @@
       </div>
       <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-        <h3>Календарь</h3>
-        <p>Календарь на год с вашими фото в любом стиле — в подарок маме, папе, второй половинке.</p>
+        <h3>Календарь от ДР до ДР<span class="new">новое</span></h3>
+        <p>Не с января, а с дня рождения — на целый год жизни человека. <a href="#bday" style="color:var(--amber);font-weight:700">Как это выглядит</a></p>
       </div>
       <div class="card reveal tilt">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -435,6 +567,21 @@
         <p>Цифровая открытка, юмор с ИИ или мини-подкаст о жизни человека к юбилею.</p>
       </div>
       <div class="card reveal tilt">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="4"/><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/></svg>
+        <h3>Оживление старых фото<span class="new">новое</span></h3>
+        <p>Восстановлю выцветший снимок бабушки и дедушки, раскрашу и оживлю его в короткое видео. Можно распечатать.</p>
+      </div>
+      <div class="card reveal tilt">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2z"/><path d="M22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg>
+        <h3>Сказка, где ребёнок — герой<span class="new">новое</span></h3>
+        <p>Иллюстрированная книжка с лицом и именем ребёнка, его питомцем и любимыми игрушками. Цифровая или печатная.</p>
+      </div>
+      <div class="card reveal tilt">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 8 9 6 9-6"/><path d="M8 3l4 3 4-3"/></svg>
+        <h3>Приглашение на праздник<span class="new">новое</span></h3>
+        <p>Видео-приглашение на свадьбу или день рождения — и печатная версия в том же стиле для тех, кто любит бумагу.</p>
+      </div>
+      <div class="card reveal tilt wide">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8l3 3 2-2 3 3"/></svg>
         <h3 id="game">Игра</h3>
         <p>Персональная игра с именем и шутками про именинника — открывается по ссылке на любом телефоне, без установки.</p>
@@ -526,98 +673,205 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
           <div class="style-track" id="styleTrack">
-
             <div class="style-slide" style="background:linear-gradient(155deg,#FF6FA5,#7A3CFF 60%,#2a1147)">
-              <span class="ss-icon">🎌</span>
-              <div class="ss-name">Аниме-стиль</div>
+              <span class="ss-icon">🎌</span><div class="ss-name">Аниме-стиль</div>
               <div class="ss-desc">Большие выразительные глаза, яркие контуры, как из любимого аниме-сериала. Эффектно и узнаваемо.</div>
               <span class="ss-mood">Ярко · смело</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#cfd3da,#7c8194 60%,#2b2e38)">
-              <span class="ss-icon">🏛️</span>
-              <div class="ss-name">Античная статуя</div>
+              <span class="ss-icon">🏛️</span><div class="ss-name">Античная статуя</div>
               <div class="ss-desc">Мраморная скульптура в духе греческого музея — благородная поза, драпировка ткани, драматичный свет.</div>
               <span class="ss-mood">Элегантно · вечно</span>
             </div>
-
             <div class="style-slide" style="background:radial-gradient(circle at 32% 28%,#fff,#aeb3c0 32%,#15151a 85%)">
-              <span class="ss-icon">🪩</span>
-              <div class="ss-name">Диско-шар</div>
+              <span class="ss-icon">🪩</span><div class="ss-name">Диско-шар</div>
               <div class="ss-desc">Превращение в сияющий зеркальный шар из тысяч мелких бликов. Гламурно, как на лучшей вечеринке 70-х.</div>
               <span class="ss-mood">Блеск · вечеринка</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#FFB14E,#FF4D8D 65%,#341552)">
-              <span class="ss-icon">📼</span>
-              <div class="ss-name">Тогда / Сейчас</div>
+              <span class="ss-icon">📼</span><div class="ss-name">Тогда / Сейчас</div>
               <div class="ss-desc">Вы сегодня — и вы же в 1999 году, на зернистой пленке со вспышкой. Ностальгия, от которой тает сердце.</div>
               <span class="ss-mood">Тёплая ностальгия</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#8ecbff,#3f6fff 60%,#16204f)">
-              <span class="ss-icon">🧸</span>
-              <div class="ss-name">3D-фигурка</div>
+              <span class="ss-icon">🧸</span><div class="ss-name">3D-фигурка</div>
               <div class="ss-desc">Глянцевая виниловая игрушка-коллекционка с вашим лицом — будто с витрины дорогого дизайнерского магазина.</div>
               <span class="ss-mood">Мило · премиум</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#d9c79a,#8a6b3f 60%,#241808)">
-              <span class="ss-icon">🔮</span>
-              <div class="ss-name">Карта Таро</div>
+              <span class="ss-icon">🔮</span><div class="ss-name">Карта Таро</div>
               <div class="ss-desc">Вы — герой собственной карты Таро в классическом мистическом стиле. Загадочно и очень личное.</div>
               <span class="ss-mood">Магия · символы</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#ffe27a,#ff5e5e 60%,#19192e)">
-              <span class="ss-icon">💥</span>
-              <div class="ss-name">Комикс</div>
+              <span class="ss-icon">💥</span><div class="ss-name">Комикс</div>
               <div class="ss-desc">Яркие краски, жирный контур и эффект полутонов — будто страница из классического комикса 80-х.</div>
               <span class="ss-mood">Дерзко · весело</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#ece7d8,#a39d8e 60%,#252219)">
-              <span class="ss-icon">📰</span>
-              <div class="ss-name">Винтажная газета</div>
+              <span class="ss-icon">📰</span><div class="ss-name">Винтажная газета</div>
               <div class="ss-desc">Вы на первой полосе старинной газеты с заголовками о себе. Чёрно-белый шарм и капля абсурдного юмора.</div>
               <span class="ss-mood">Старина · ирония</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#ffd6e8,#ff7fae 60%,#5c1f3c)">
-              <span class="ss-icon">🎨</span>
-              <div class="ss-name">Цветотип</div>
+              <span class="ss-icon">🎨</span><div class="ss-name">Цветотип</div>
               <div class="ss-desc">Наглядная подборка: какие цвета одежды лучше всего раскрывают именно вашу внешность. Практично и красиво.</div>
               <span class="ss-mood">Полезно · стильно</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#c9b8ff,#7c5ce0 60%,#241a4a)">
-              <span class="ss-icon">💇</span>
-              <div class="ss-name">Подбор причёски</div>
+              <span class="ss-icon">💇</span><div class="ss-name">Подбор причёски</div>
               <div class="ss-desc">Несколько вариантов стрижки рядом друг с другом — наглядно увидите, что подойдёт вам больше всего.</div>
               <span class="ss-mood">Преображение</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#ffe9d6,#ff9d5e 60%,#5c2e10)">
-              <span class="ss-icon">🧁</span>
-              <div class="ss-name">Чиби-стикеры</div>
-              <div class="ss-desc">Набор милых мини-версий себя с разными эмоциями — готовый стикерпак для своего мессенджера.</div>
+              <span class="ss-icon">🧁</span><div class="ss-name">Чиби-стикеры</div>
+              <div class="ss-desc">Набор милых мини-версий себя с разными эмоциями — готовый стикерпак для мессенджера или печатные наклейки.</div>
               <span class="ss-mood">Мило · смешно</span>
             </div>
-
             <div class="style-slide" style="background:linear-gradient(155deg,#9be7ff,#3f9fd9 60%,#0c2438)">
-              <span class="ss-icon">🕹️</span>
-              <div class="ss-name">8-бит игра</div>
+              <span class="ss-icon">🕹️</span><div class="ss-name">8-бит игра</div>
               <div class="ss-desc">Вы — главный герой ретро-видеоигры в пиксельной графике, в момент победы под фанфары и салют.</div>
               <span class="ss-mood">Игра · ностальгия</span>
             </div>
-
           </div>
           <button class="style-nav-btn next" id="styleNext" aria-label="Вперёд">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
           </button>
         </div>
         <div class="style-dots" id="styleDots"></div>
-        <p class="style-explorer-footer">Это лишь часть идей — полный каталог пришлю в <a href="https://t.me/keuqz" target="_blank" rel="noopener">Telegram</a></p>
+        <p class="style-explorer-footer">Любой стиль можно перенести на кружку, холст или футболку. Полный каталог пришлю в <a href="https://t.me/keuqz" target="_blank" rel="noopener">Telegram</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRINT / OFFLINE ================= -->
+<section id="print" class="print-section">
+  <div class="wrap">
+    <span class="eyebrow reveal">Печатные подарки</span>
+    <h2 class="reveal">Из экрана — в руки</h2>
+    <p class="lead reveal" style="margin-top:16px">Нейросети создают картинку, а калининградская типография превращает её в вещь, которую можно подержать, повесить на стену или пить из неё кофе каждое утро.</p>
+
+    <div class="bday reveal" id="bday">
+      <div>
+        <span class="badge">Новинка сезона</span>
+        <h3>Календарь от дня рождения до дня рождения</h3>
+        <p>Обычный календарь начинается 1 января. Этот начинается в день, когда вы его дарите, и заканчивается ровно через год, в следующий день рождения. Целый год жизни человека на стене.</p>
+        <ul>
+          <li>На каждый месяц — фото из прожитого года или ИИ-образ: в июле он супергерой, в декабре — герой новогодней открытки</li>
+          <li>Отмечаю ваши даты: годовщины, дни рождения близких, общие праздники и шутки</li>
+          <li>Последняя страница — обратный отсчёт до следующего дня рождения</li>
+        </ul>
+        <div class="bday-price">от 1 000 ₽ <small>макет на 12 месяцев</small></div>
+        <p class="bday-formats">Печать: перекидной настенный, настольный домик, календарь-плакат или карманный. Можно получить только файл.</p>
+        <span class="magnetic"><a href="#contact" class="btn btn-primary" data-pick="Календарь от ДР до ДР">Хочу такой календарь</a></span>
+      </div>
+      <div class="bday-demo">
+        <label for="bdayInput">Проверьте на дате рождения того, кого поздравляете</label>
+        <input type="date" id="bdayInput" class="field" min="1920-01-01" max="2026-12-31">
+        <div class="bday-out" id="bdayOut"></div>
+        <div class="months" id="bdayMonths" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="print-head">
+      <h2 class="reveal" style="font-size:clamp(24px,3.4vw,34px)">Что ещё можно подарить в руки</h2>
+    </div>
+    <div class="print-grid">
+      <div class="pcard reveal">
+        <span class="emoji">🧩</span>
+        <h3>Пазл с секретом</h3>
+        <p>ИИ-картина по вашему фото. Собрал — прочитал признание, приглашение или новость «у нас будет малыш».</p>
+        <span class="on">Печать: пазл</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Пазл с секретом">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">☕</span>
+        <h3>Кружка с портретом в образе</h3>
+        <p>Античная статуя, комикс, 3D-фигурка — любой стиль из каталога. По желанию QR-код, который включает вашу песню.</p>
+        <span class="on">Печать: кружка</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Кружка с портретом">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">👕</span>
+        <h3>Детский рисунок оживает</h3>
+        <p>ИИ превращает каляку-маляку ребёнка в «настоящего» персонажа. На футболке рядом — рисунок и его воплощение.</p>
+        <span class="on">Печать: детская футболка, толстовка, шоппер</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Футболка с детским рисунком">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">🖼️</span>
+        <h3>Портрет на холсте</h3>
+        <p>Вы в манере старых мастеров, импрессионистов или в стиле любимого мультфильма. Для гостиной или в подарок родителям.</p>
+        <span class="on">Печать: холст на подрамнике, модульная картина</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Портрет на холсте">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">🏷️</span>
+        <h3>Стикерпак из себя</h3>
+        <p>Мини-версии человека с разными эмоциями — на телефон, ноутбук, ежедневник. Тот же набор — в мессенджер.</p>
+        <span class="on">Печать: наклейки</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Печатный стикерпак">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">💌</span>
+        <h3>Открытка, которая поёт</h3>
+        <p>Красивая бумажная открытка с QR-кодом: наводишь камеру — играет песня или клип, написанные про адресата.</p>
+        <span class="on">Печать: открытка и конверт</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Открытка с QR на песню">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">🃏</span>
+        <h3>Колода «52 причины»</h3>
+        <p>52 карточки с вашими фото и причинами, почему вы любите человека. По одной в неделю — на целый год.</p>
+        <span class="on">Печать: карточки на плотном картоне</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Колода 52 причины">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">📸</span>
+        <h3>Полароиды и магниты «Наш год»</h3>
+        <p>Лучшие моменты в едином стиле с подписями — для гирлянды на стене или коллекции на холодильнике.</p>
+        <span class="on">Печать: фото Polaroid, магниты</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Полароиды или магниты">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">📰</span>
+        <h3>Журнал о звезде</h3>
+        <p>Глянцевый журнал, где герой на обложке, внутри интервью, «папарацци-снимки» и гороскоп на год.</p>
+        <span class="on">Печать: журнал, фотокнига</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Журнал о звезде">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">👵</span>
+        <h3>Альбом «История семьи»</h3>
+        <p>Восстанавливаю и раскрашиваю старые снимки, собираю в фотокнигу или постер-древо. Бабушки плачут от счастья.</p>
+        <span class="on">Печать: фотокнига, фотографии, постер</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Альбом История семьи">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">🎉</span>
+        <h3>Праздник в одном стиле</h3>
+        <p>Приглашения, меню, наклейки на подарки и баннер для фотозоны — всё придумано ИИ под тему праздника.</p>
+        <span class="on">Печать: открытки, наклейки, плакат, пресс-волл</span>
+        <a href="#contact" class="pick" data-pick="Печатный подарок" data-item="Оформление праздника">Хочу такое</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="emoji">💼</span>
+        <h3>Подарки коллегам</h3>
+        <p>Вся команда в образе супергероев или героев сериала — на кружках, ковриках для мыши, блокнотах и в общем календаре.</p>
+        <span class="on">Печать: кружки, коврики, блокноты, календари</span>
+        <a href="#contact" class="pick" data-pick="Подарок коллегам" data-item="Подарки коллегам">Хочу такое</a>
+      </div>
+    </div>
+
+    <div class="modes">
+      <div class="mode reveal">
+        <b>Файл для печати</b>
+        <p>Присылаю готовый макет под требования типографии. Печатаете где удобно — подходит и тем, кто живёт не в Калининграде.</p>
+      </div>
+      <div class="mode reveal">
+        <b>Под ключ в Калининграде</b>
+        <p>Сама заказываю печать в типографии, проверяю качество и передаю готовый подарок. Итоговую цену печати называю до оплаты.</p>
       </div>
     </div>
   </div>
@@ -630,19 +884,22 @@
     <h2 class="reveal">Когда слова заканчиваются —<br>остаются эмоции</h2>
     <p class="lead reveal" style="margin-top:16px">Самый ценный подарок — это чувства. Особенно когда между вами километры.</p>
     <div class="occ-grid">
-      <div class="occ reveal"><span class="emoji">💍</span><b>Свадьба</b><span>история любви и клип для гостей</span></div>
+      <div class="occ reveal"><span class="emoji">🎂</span><b>День рождения</b><span>календарь на год жизни и песня</span></div>
+      <div class="occ reveal"><span class="emoji">🎄</span><b>Новый год</b><span>кружки, календари, открытки с QR</span></div>
+      <div class="occ reveal"><span class="emoji">💍</span><b>Свадьба</b><span>история любви, приглашения, клип</span></div>
       <div class="occ reveal"><span class="emoji">✈️</span><b>На расстоянии</b><span>тёплый привет тому, кто далеко</span></div>
-      <div class="occ reveal"><span class="emoji">🎂</span><b>Юбилей</b><span>подкаст о жизни и пути человека</span></div>
-      <div class="occ reveal"><span class="emoji">❤️</span><b>Признание</b><span>песня и клип вместо обычных слов</span></div>
-      <div class="occ reveal"><span class="emoji">👩</span><b>Маме и папе</b><span>календарь и фотокнига семьи</span></div>
-      <div class="occ reveal"><span class="emoji">🎉</span><b>Просто так</b><span>чтобы удивить без повода</span></div>
+      <div class="occ reveal"><span class="emoji">🌟</span><b>Юбилей</b><span>подкаст о жизни и альбом семьи</span></div>
+      <div class="occ reveal"><span class="emoji">❤️</span><b>Признание</b><span>песня, пазл с секретом, 52 причины</span></div>
+      <div class="occ reveal"><span class="emoji">👩</span><b>Маме и папе</b><span>портрет на холсте и фотокнига</span></div>
+      <div class="occ reveal"><span class="emoji">🧒</span><b>Ребёнку</b><span>сказка о нём и футболка с рисунком</span></div>
+      <div class="occ reveal"><span class="emoji">💼</span><b>Коллегам</b><span>вся команда в образах на кружках</span></div>
       <div class="occ reveal"><span class="emoji">💑</span><b>Годовщина</b><span>хроника ваших отношений</span></div>
-      <div class="occ reveal"><span class="emoji">😄</span><b>Прикол</b><span>юмор и «фейк-новости» с ИИ</span></div>
+      <div class="occ reveal"><span class="emoji">😄</span><b>Прикол</b><span>журнал о звезде и «фейк-новости»</span></div>
       <div class="occ reveal" style="border-color:rgba(255,177,78,.4);background:rgba(255,177,78,.06);display:flex;flex-direction:column;gap:10px">
-  <span class="emoji">💡</span>
-  <b>Своя идея</b>
-  <span>Любая задумка — обсудим и придумаем, как воплотить</span>
-  <a href="#contact" style="margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 18px;border-radius:100px;background:rgba(255,177,78,.15);border:1px solid rgba(255,177,78,.5);color:var(--amber);font-size:12.5px;font-weight:700;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(255,177,78,.28)'" onmouseout="this.style.background='rgba(255,177,78,.15)'">Написать →</a>
+        <span class="emoji" style="margin-bottom:0">💡</span>
+        <b>Своя идея</b>
+        <span>Любая задумка — обсудим и придумаем, как воплотить</span>
+        <a href="#contact" data-pick="Своя идея" style="margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 18px;border-radius:100px;background:rgba(255,177,78,.15);border:1px solid rgba(255,177,78,.5);color:var(--amber);font-size:12.5px;font-weight:700">Написать →</a>
       </div>
     </div>
   </div>
@@ -657,17 +914,17 @@
       <div class="step reveal">
         <div class="num">01</div>
         <h3>Расскажите историю</h3>
-        <p>Вы присылаете фото, детали и пожелания: про кого подарок, какие моменты важны, в каком стиле.</p>
+        <p>Вы присылаете фото, детали и пожелания: про кого подарок, какие моменты важны, в каком стиле и к какой дате.</p>
       </div>
       <div class="step reveal">
         <div class="num">02</div>
         <h3>Я творю с ИИ</h3>
-        <p>Беру вашу историю и превращаю её в песню, клип или книгу. Вы не тратите силы и время на обучение нейросетям.</p>
+        <p>Превращаю историю в песню, клип, книгу или макет для печати и показываю вам до финала. Вы не тратите силы на обучение нейросетям.</p>
       </div>
       <div class="step reveal">
         <div class="num">03</div>
         <h3>Получаете результат</h3>
-        <p>Готовый подарок у вас на руках. Останется только отправить, показать или распечатать.</p>
+        <p>Цифровой подарок — файлом или ссылкой. Печатный — готовой вещью в Калининграде или файлом для любой типографии.</p>
       </div>
     </div>
   </div>
@@ -689,17 +946,17 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Готово за день</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Формат «до / после»</li>
         </ul>
-        <span class="magnetic"><a href="#contact" class="btn btn-ghost">Хочу так же</a></span>
+        <span class="magnetic"><a href="#contact" class="btn btn-ghost" data-pick="Фото-магия">Хочу так же</a></span>
       </div>
 
       <div class="plan featured reveal">
         <h3>История</h3>
-        <p class="sub">Клип, открытка или фотокнига по вашей истории — самый частый подарок.</p>
+        <p class="sub">Песня, клип, игра или открытка по вашей истории — самый частый подарок.</p>
         <div class="cost">от 1 500 ₽</div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Подкаст о жизни человека</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Авторская песня про человека</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Персональная<a href="#game">игра</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Клип или подкаст о жизни человека</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span>Персональная <a href="#game">игра</a></span></li>
         </ul>
         <span class="magnetic"><a href="#contact" class="btn btn-primary">Заказать</a></span>
       </div>
@@ -710,13 +967,20 @@
         <div class="cost">по запросу</div>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Постер с инфографикой о человеке</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Клип 1-1,5 минуты на любую тему</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Печатная книга-макет о человеке/событии</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Клип 1–1,5 минуты на любую тему</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Печатная книга о человеке или событии</li>
         </ul>
-        <span class="magnetic"><a href="#contact" class="btn btn-ghost">Обсудить идею</a></span>
+        <span class="magnetic"><a href="#contact" class="btn btn-ghost" data-pick="Своя идея">Обсудить идею</a></span>
       </div>
     </div>
-    <p class="price-note reveal">Цены — стартовые, для наполнения портфолио. Постоянным клиентам и за рекомендации — скидки.</p>
+
+    <div class="print-prices reveal">
+      <h3>Печатные подарки<small>дизайн от меня, печать — в типографии</small></h3>
+      <div class="pp"><b>от 500 ₽</b><span>макет для кружки, открытки, пазла, футболки, наклеек</span></div>
+      <div class="pp"><b>от 1 000 ₽</b><span>календарь от ДР до ДР или корпоративный календарь на 12 месяцев</span></div>
+      <div class="pp"><b>+ печать</b><span>по прайсу типографии, считаю заранее. Передача по Калининграду</span></div>
+    </div>
+    <p class="price-note reveal">Цены — стартовые, для наполнения портфолио. Постоянным клиентам и за рекомендации — скидки. Для заказов от 5 одинаковых подарков (коллегам, гостям) — отдельная цена.</p>
   </div>
 </section>
 
@@ -725,25 +989,141 @@
   <div class="wrap">
     <div class="about">
       <div class="about-photo reveal">
-  <img src="images/profile_new.png" alt="Обо мне" style="width:100%;height:100%;object-fit:cover;border-radius:28px;">
+        <img src="images/profile_new.png" alt="Обо мне" style="width:100%;height:100%;object-fit:cover;border-radius:28px;">
       </div>
       <div class="reveal">
         <span class="eyebrow">Обо мне</span>
         <h2>Превращаю нейросети в эмоции</h2>
         <p>Многие не умеют пользоваться нейросетями, а многие и не хотят — на обучение нужно много сил и времени, которых после рабочей недели почти не остаётся. <strong>Я беру это на себя.</strong></p>
-        <p>Вы приходите с историей и фотографиями — я возвращаю готовый подарок, который трогает за живое. Делаю акцент на сервисе, качестве и ваших эмоциях.</p>
+        <p>Вы приходите с историей и фотографиями — я возвращаю готовый подарок, который трогает за живое: в телефоне или в руках. Делаю акцент на сервисе, качестве и ваших эмоциях.</p>
         <p><strong>Давайте создадим что-то, что захочется пересматривать.</strong></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= FINAL CTA ================= -->
+<!-- ================= FAQ ================= -->
+<section id="faq" style="padding-top:0">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow reveal">Вопросы</span>
+    <h2 class="reveal">Коротко о главном</h2>
+    <div class="faq" style="text-align:left">
+      <details class="reveal">
+        <summary>Сколько времени занимает заказ?</summary>
+        <p>Обработка фото — в течение дня. Песня, клип, игра или календарь — обычно несколько дней, точный срок называю сразу при обсуждении. Печать добавляет ещё 1–3 дня. Если подарок нужен к конкретной дате — напишите заранее, особенно перед Новым годом и 8 Марта.</p>
+      </details>
+      <details class="reveal">
+        <summary>Я не из Калининграда. Можно заказать?</summary>
+        <p>Да. Все цифровые подарки передаю онлайн — в любой город и страну. Для печатных подготовлю файл под требования типографии в вашем городе.</p>
+      </details>
+      <details class="reveal">
+        <summary>Что нужно от меня?</summary>
+        <p>Фотографии, имя человека, повод и пара историй или шуток, которые понятны только вам. Остальное я спрошу сама — обычно хватает короткой переписки в Telegram.</p>
+      </details>
+      <details class="reveal">
+        <summary>А если фото старые или плохого качества?</summary>
+        <p>Это нормально. Нейросети умеют восстанавливать, повышать чёткость и раскрашивать снимки. Пришлите то, что есть, — скажу честно, что получится.</p>
+      </details>
+      <details class="reveal">
+        <summary>Увижу ли я результат до финала?</summary>
+        <p>Да. Показываю промежуточный вариант, и мы вносим правки до того, как подарок будет готов. Печатный макет отправляю в типографию только после вашего «да».</p>
+      </details>
+      <details class="reveal">
+        <summary>Как оплатить?</summary>
+        <p>Переводом, работаю как самозанятая и выдаю чек. Порядок оплаты согласуем при обсуждении заказа.</p>
+      </details>
+      <details class="reveal">
+        <summary>Что будет с моими фотографиями?</summary>
+        <p>Использую их только для вашего заказа. В портфолио показываю работы исключительно с вашего согласия.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA + ORDER BUILDER ================= -->
 <section id="contact" class="final">
   <div class="wrap">
     <span class="eyebrow reveal">Связаться</span>
     <h2 class="reveal">Расскажите, кого хотите порадовать —<br>придумаю подарок вместе с вами</h2>
-    <p class="lead reveal">Свяжитесь со мной любым удобным способом.</p>
+    <p class="lead reveal">Соберите заявку за минуту — я отвечу с идеями и точной ценой.</p>
+
+    <div class="order reveal" id="order">
+      <h3>Заявка на подарок</h3>
+      <p>Заполните что знаете — остальное обсудим в переписке.</p>
+
+      <div class="row">
+        <span class="lbl">Что хотите?</span>
+        <div class="chips" id="chips">
+          <button type="button" class="chip" data-value="Песня">Песня</button>
+          <button type="button" class="chip" data-value="Клип / видео">Клип / видео</button>
+          <button type="button" class="chip" data-value="Фото-магия">Фото-магия</button>
+          <button type="button" class="chip" data-value="Календарь от ДР до ДР">Календарь от ДР до ДР</button>
+          <button type="button" class="chip" data-value="Печатный подарок">Печатный подарок</button>
+          <button type="button" class="chip" data-value="Фотокнига / журнал">Фотокнига / журнал</button>
+          <button type="button" class="chip" data-value="История любви">История любви</button>
+          <button type="button" class="chip" data-value="Игра">Игра</button>
+          <button type="button" class="chip" data-value="Оживление старых фото">Оживление старых фото</button>
+          <button type="button" class="chip" data-value="Сказка для ребёнка">Сказка для ребёнка</button>
+          <button type="button" class="chip" data-value="Подарок коллегам">Подарок коллегам</button>
+          <button type="button" class="chip" data-value="Подарок к Новому году">К Новому году</button>
+          <button type="button" class="chip" data-value="Своя идея">Своя идея</button>
+        </div>
+      </div>
+
+      <div class="row two">
+        <div>
+          <label class="lbl" for="oWho">Для кого</label>
+          <input id="oWho" class="field" type="text" placeholder="Например: мужу Саше, 35 лет">
+        </div>
+        <div>
+          <label class="lbl" for="oOcc">Повод</label>
+          <select id="oOcc" class="field">
+            <option value="">Выберите</option>
+            <option>День рождения</option>
+            <option>Новый год</option>
+            <option>Свадьба</option>
+            <option>Годовщина</option>
+            <option>Юбилей</option>
+            <option>Признание</option>
+            <option>Коллегам / корпоратив</option>
+            <option>Просто так</option>
+            <option>Другое</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row two">
+        <div>
+          <label class="lbl" for="oDate">К какой дате нужно</label>
+          <input id="oDate" class="field" type="date">
+        </div>
+        <div>
+          <label class="lbl" for="oFmt">Формат</label>
+          <select id="oFmt" class="field">
+            <option value="">Пока не знаю</option>
+            <option>Цифровой (файл / ссылка)</option>
+            <option>Печатный, в Калининграде</option>
+            <option>Файл для печати в другом городе</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="lbl" for="oMsg">Пара слов об идее</label>
+        <textarea id="oMsg" class="field" placeholder="Что любит человек, какие у вас общие шутки, какое настроение хочется"></textarea>
+      </div>
+
+      <div class="order-actions">
+        <button type="button" class="btn btn-primary" id="sendTg">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M21.8 5.2 2.9 12.4c-1 .4-1 1.7.1 2l4.8 1.5 1.8 5.6c.3.8 1.3 1 1.9.3l2.6-2.6 4.7 3.5c.7.5 1.7.1 1.9-.8l3-13.8c.2-1-.8-1.9-1.9-1.5zM9.6 14.6l8.4-5.2-6.9 6.1-.3 3.1z"/></svg>
+          Отправить в Telegram
+        </button>
+        <button type="button" class="btn btn-ghost" id="sendMail">Отправить на почту</button>
+      </div>
+      <p class="order-hint">Кнопка Telegram скопирует заявку и откроет чат — просто вставьте текст и отправьте.</p>
+    </div>
+
+    <p class="or-line reveal">или напишите напрямую</p>
     <div class="socials reveal">
       <a href="https://t.me/keuqz" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 5.2 2.9 12.4c-1 .4-1 1.7.1 2l4.8 1.5 1.8 5.6c.3.8 1.3 1 1.9.3l2.6-2.6 4.7 3.5c.7.5 1.7.1 1.9-.8l3-13.8c.2-1-.8-1.9-1.9-1.5zM9.6 14.6l8.4-5.2-6.9 6.1-.3 3.1z"/></svg>
@@ -760,12 +1140,14 @@
 <footer>
   <div class="wrap">
     <div class="logo">ИИ<b>моция</b></div>
-    ИИ-подарки на заказ · Калининград · самозанятая<br>
+    ИИ-подарки на заказ · цифровые и печатные · Калининград · самозанятая<br>
     © 2026 · Создаю эмоции, которые хочется пересматривать<br>
     Все тексты, аудио, визуал и дизайн — авторская работа Никитиной Д.Д. Копирование без согласия не допускается.
   </div>
 </footer>
 
+<a href="#contact" class="fab" id="fab">🎁 Заказать подарок</a>
+<div class="toast" id="toast" role="status"></div>
 <script>
   // звёзды в hero
   const starsBox = document.getElementById('stars');
@@ -777,25 +1159,18 @@
     starsBox.appendChild(s);
   }
 
-  // ===== 4. hero title word-reveal (tag-safe) =====
+  // hero title word-reveal (tag-safe)
   (function(){
     const el = document.getElementById('heroTitle');
-    const html = el.innerHTML;
-    const tokens = html.split(/(<[^>]+>|<br>|\s+)/).filter(t => t !== '' && t !== undefined);
-    let delay = 0;
-    let out = '';
-    let i = 0;
+    const tokens = el.innerHTML.split(/(<[^>]+>|<br>|\s+)/).filter(t => t !== '' && t !== undefined);
+    let delay = 0, out = '', i = 0;
     while(i < tokens.length){
       const tok = tokens[i];
       if(/^\s+$/.test(tok)){ out += tok; i++; continue; }
-      if(tok === '<br>' || /^<br\s*\/?>$/.test(tok)){ out += tok; i++; continue; }
+      if(/^<br\s*\/?>$/.test(tok)){ out += tok; i++; continue; }
       if(/^<[^>]+>$/.test(tok) && !tok.startsWith('</')){
-        let group = tok;
-        i++;
-        while(i < tokens.length && !/^<\/[^>]+>$/.test(tokens[i])){
-          group += tokens[i];
-          i++;
-        }
+        let group = tok; i++;
+        while(i < tokens.length && !/^<\/[^>]+>$/.test(tokens[i])){ group += tokens[i]; i++; }
         if(i < tokens.length){ group += tokens[i]; i++; }
         const d = delay.toFixed(2); delay += 0.09;
         out += `<span class="word" style="animation-delay:${d}s">${group}</span>`;
@@ -814,7 +1189,7 @@
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // ===== 1. cursor sparkle trail (desktop only, throttled) =====
+  // cursor sparkle trail (desktop only, throttled)
   if(window.matchMedia('(hover: hover)').matches){
     const trailBox = document.getElementById('cursorTrail');
     let lastSpark = 0;
@@ -826,14 +1201,13 @@
       s.style.left = e.clientX + 'px';
       s.style.top = e.clientY + 'px';
       const size = 4 + Math.random()*5;
-      s.style.width = size+'px';
-      s.style.height = size+'px';
+      s.style.width = size+'px'; s.style.height = size+'px';
       trailBox.appendChild(s);
       setTimeout(()=>s.remove(), 950);
     });
   }
 
-  // ===== 2. aurora parallax on scroll =====
+  // aurora parallax
   (function(){
     const aurora = document.getElementById('aurora');
     if(!aurora) return;
@@ -842,46 +1216,37 @@
       if(ticking) return;
       ticking = true;
       requestAnimationFrame(()=>{
-        const y = window.scrollY;
-        aurora.style.transform = `translateY(${y*0.18}px)`;
+        aurora.style.transform = `translateY(${window.scrollY*0.18}px)`;
         ticking = false;
       });
-    });
+    }, {passive:true});
   })();
 
-  // ===== 5. magnetic buttons =====
+  // magnetic buttons
   document.querySelectorAll('.magnetic').forEach(wrap=>{
     const btn = wrap.querySelector('.btn');
     if(!btn) return;
-    const strength = 0.35;
     wrap.addEventListener('mousemove', (e)=>{
       const r = wrap.getBoundingClientRect();
-      const x = e.clientX - r.left - r.width/2;
-      const y = e.clientY - r.top - r.height/2;
-      btn.style.transform = `translate(${x*strength}px, ${y*strength}px)`;
+      btn.style.transform = `translate(${(e.clientX-r.left-r.width/2)*0.35}px, ${(e.clientY-r.top-r.height/2)*0.35}px)`;
     });
-    wrap.addEventListener('mouseleave', ()=>{
-      btn.style.transform = 'translate(0,0)';
-    });
+    wrap.addEventListener('mouseleave', ()=>{ btn.style.transform = 'translate(0,0)'; });
   });
 
-  // ===== 6. 3D tilt on service cards =====
+  // 3D tilt on service cards
   document.querySelectorAll('.tilt').forEach(card=>{
-    const maxTilt = 9;
+    const maxTilt = card.classList.contains('wide') ? 3 : 9;
     card.addEventListener('mousemove', (e)=>{
       const r = card.getBoundingClientRect();
-      const px = (e.clientX - r.left)/r.width;
-      const py = (e.clientY - r.top)/r.height;
-      const rx = (py - 0.5) * -maxTilt*2;
-      const ry = (px - 0.5) * maxTilt*2;
-      card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+      const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
+      card.style.transform = `perspective(1000px) rotateX(${(py-0.5)*-maxTilt*2}deg) rotateY(${(px-0.5)*maxTilt*2}deg) translateY(-6px)`;
     });
     card.addEventListener('mouseleave', ()=>{
       card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
     });
   });
 
-  // ===== mini audio player for song case =====
+  // mini audio player
   (function(){
     const audio = document.getElementById('caseAudio');
     const btn = document.getElementById('caseAudioBtn');
@@ -895,28 +1260,22 @@
       else { audio.pause(); btn.innerHTML = playIcon; }
     });
     audio.addEventListener('timeupdate', ()=>{
-      if(audio.duration){
-        fill.style.width = (audio.currentTime/audio.duration*100)+'%';
-      }
+      if(audio.duration) fill.style.width = (audio.currentTime/audio.duration*100)+'%';
     });
     audio.addEventListener('ended', ()=>{ btn.innerHTML = playIcon; fill.style.width='0%'; });
     bar.addEventListener('click', (e)=>{
       const r = bar.getBoundingClientRect();
-      const p = (e.clientX - r.left)/r.width;
-      if(audio.duration) audio.currentTime = p*audio.duration;
+      if(audio.duration) audio.currentTime = ((e.clientX - r.left)/r.width)*audio.duration;
     });
   })();
 
-  // ===== style explorer carousel =====
+  // style explorer carousel
   (function(){
     const trigger = document.getElementById('styleTrigger');
     const explorer = document.getElementById('styleExplorer');
     const track = document.getElementById('styleTrack');
-    const prevBtn = document.getElementById('stylePrev');
-    const nextBtn = document.getElementById('styleNext');
     const dotsBox = document.getElementById('styleDots');
     if(!trigger || !explorer || !track) return;
-
     const slides = Array.from(track.children);
     slides.forEach((_, i)=>{
       const d = document.createElement('span');
@@ -924,7 +1283,6 @@
       dotsBox.appendChild(d);
     });
     const dots = Array.from(dotsBox.children);
-
     let opened = false;
     trigger.addEventListener('click', ()=>{
       opened = !opened;
@@ -932,37 +1290,21 @@
       trigger.querySelector('span').textContent = opened
         ? 'Свернуть каталог идей ↑'
         : 'А ещё со снимком можно вот так — листайте идеи →';
-      if(opened){
-        setTimeout(()=>explorer.scrollIntoView({behavior:'smooth', block:'nearest'}), 250);
-      }
+      if(opened) setTimeout(()=>explorer.scrollIntoView({behavior:'smooth', block:'nearest'}), 250);
     });
-
     function updateActive(){
-      const trackLeft = track.scrollLeft;
       let closest = 0, closestDist = Infinity;
       slides.forEach((s, i)=>{
-        const dist = Math.abs(s.offsetLeft - trackLeft);
+        const dist = Math.abs(s.offsetLeft - track.scrollLeft);
         if(dist < closestDist){ closestDist = dist; closest = i; }
       });
       dots.forEach((d,i)=>d.classList.toggle('active', i===closest));
     }
-    track.addEventListener('scroll', ()=>{
-      window.requestAnimationFrame(updateActive);
-    }, {passive:true});
-
-    function scrollByCard(dir){
-      const card = slides[0];
-      const gap = 14;
-      track.scrollBy({left: dir*(card.offsetWidth+gap), behavior:'smooth'});
-    }
-    prevBtn.addEventListener('click', ()=>scrollByCard(-1));
-    nextBtn.addEventListener('click', ()=>scrollByCard(1));
-
-    dots.forEach((d,i)=>{
-      d.addEventListener('click', ()=>{
-        track.scrollTo({left: slides[i].offsetLeft, behavior:'smooth'});
-      });
-    });
+    track.addEventListener('scroll', ()=>requestAnimationFrame(updateActive), {passive:true});
+    const step = dir => track.scrollBy({left: dir*(slides[0].offsetWidth+14), behavior:'smooth'});
+    document.getElementById('stylePrev').addEventListener('click', ()=>step(-1));
+    document.getElementById('styleNext').addEventListener('click', ()=>step(1));
+    dots.forEach((d,i)=>d.addEventListener('click', ()=>track.scrollTo({left: slides[i].offsetLeft, behavior:'smooth'})));
   })();
 
   // before / after slider
@@ -974,11 +1316,9 @@
     let dragging=false;
     function setPos(clientX){
       const r=ba.getBoundingClientRect();
-      let p=((clientX-r.left)/r.width)*100;
-      p=Math.max(2,Math.min(98,p));
+      let p=Math.max(2,Math.min(98,((clientX-r.left)/r.width)*100));
       after.style.clipPath='inset(0 0 0 '+p+'%)';
-      handle.style.left=p+'%';
-      knob.style.left=p+'%';
+      handle.style.left=p+'%'; knob.style.left=p+'%';
     }
     function start(e){dragging=true;move(e);}
     function move(e){if(!dragging)return;const x=e.touches?e.touches[0].clientX:e.clientX;setPos(x);e.preventDefault();}
@@ -991,6 +1331,149 @@
     ba.addEventListener('touchstart',start,{passive:false});
     window.addEventListener('touchmove',move,{passive:false});
     window.addEventListener('touchend',end);
+  })();
+
+  // ===== NEW: New Year countdown =====
+  (function(){
+    const el = document.getElementById('nyDays');
+    const strip = document.getElementById('nyStrip');
+    const now = new Date();
+    const ny = new Date(now.getFullYear()+1, 0, 1);
+    const days = Math.ceil((ny - now)/86400000);
+    // показываем плашку с 1 сентября по 31 декабря
+    if(now.getMonth() < 8){ strip.style.display='none'; return; }
+    const n = days % 100, n1 = days % 10;
+    const word = (n>10 && n<20) ? 'дней' : n1===1 ? 'день' : (n1>1 && n1<5) ? 'дня' : 'дней';
+    el.textContent = days + ' ' + word;
+  })();
+
+  // ===== NEW: birthday-to-birthday calendar preview =====
+  (function(){
+    const input = document.getElementById('bdayInput');
+    const out = document.getElementById('bdayOut');
+    const box = document.getElementById('bdayMonths');
+    if(!input) return;
+    const fmt = d => d.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // пример по умолчанию: ДР через ~3 недели
+    const ex = new Date(today); ex.setDate(ex.getDate()+21);
+    const pad = n => String(n).padStart(2,'0');
+    input.value = `1993-${pad(ex.getMonth()+1)}-${pad(ex.getDate())}`;
+
+    function render(){
+      if(!input.value){ out.textContent=''; box.innerHTML=''; return; }
+      const [y,m,d] = input.value.split('-').map(Number);
+      let start = new Date(today.getFullYear(), m-1, d);
+      if(start < today) start = new Date(today.getFullYear()+1, m-1, d);
+      const next = new Date(start.getFullYear()+1, m-1, d);
+      const last = new Date(next); last.setDate(last.getDate()-1);
+      const age = start.getFullYear() - y;
+      const ageTxt = (y > 1900 && age > 0 && age < 120) ? ` — год, когда исполняется <b>${age}</b>` : '';
+      out.innerHTML = `Календарь на <b>${fmt(start)} – ${fmt(last)}</b>${ageTxt}.`;
+      let html = '';
+      for(let i=0;i<12;i++){
+        const md = new Date(start.getFullYear(), start.getMonth()+i, 1);
+        let name = md.toLocaleString('ru-RU',{month:'long'}); name = name.charAt(0).toUpperCase()+name.slice(1);
+        const bd = i===0;
+        html += `<div class="month${bd?' bd':''}"><span class="m">${bd?'🎂 ':''}${name}</span><span class="y">${bd? start.getDate()+' · старт' : md.getFullYear()}</span></div>`;
+      }
+      html += `<div class="month final"><span class="m">🎂 Снова день рождения — ${fmt(next)}</span><span class="y">последняя страница: обратный отсчёт</span></div>`;
+      box.innerHTML = html;
+    }
+    input.addEventListener('input', render);
+    input.addEventListener('change', render);
+    render();
+  })();
+
+  // ===== NEW: order builder =====
+  (function(){
+    const TG = 'https://t.me/keuqz';
+    const MAIL = 'mariamarch1426@gmail.com';
+    const chips = Array.from(document.querySelectorAll('#chips .chip'));
+    const msg = document.getElementById('oMsg');
+    const toast = document.getElementById('toast');
+
+    chips.forEach(c=>c.addEventListener('click', ()=>{
+      c.classList.toggle('on');
+      c.setAttribute('aria-pressed', c.classList.contains('on'));
+    }));
+
+    // кнопки «Хочу такое» по всему сайту предзаполняют заявку
+    document.querySelectorAll('[data-pick]').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        const chip = chips.find(c=>c.dataset.value===a.dataset.pick);
+        if(chip && !chip.classList.contains('on')){ chip.classList.add('on'); chip.setAttribute('aria-pressed','true'); }
+        const item = a.dataset.item;
+        if(item && !msg.value.includes(item)){
+          msg.value = (msg.value ? msg.value.trim()+'\n' : '') + 'Интересует: ' + item + '. ';
+        }
+      });
+    });
+
+    function buildText(){
+      const what = chips.filter(c=>c.classList.contains('on')).map(c=>c.dataset.value);
+      const who = document.getElementById('oWho').value.trim();
+      const occ = document.getElementById('oOcc').value;
+      const date = document.getElementById('oDate').value;
+      const fmt = document.getElementById('oFmt').value;
+      const note = msg.value.trim();
+      const lines = ['Здравствуйте! Хочу заказать подарок 🎁'];
+      if(what.length) lines.push('Что: ' + what.join(', '));
+      if(who) lines.push('Для кого: ' + who);
+      if(occ) lines.push('Повод: ' + occ);
+      if(date){ const [y,m,d]=date.split('-'); lines.push('К дате: ' + d+'.'+m+'.'+y); }
+      if(fmt) lines.push('Формат: ' + fmt);
+      if(note) lines.push('Идея: ' + note);
+      lines.push('(заявка с сайта ИИмоция)');
+      return lines.join('\n');
+    }
+
+    function showToast(t){
+      toast.textContent = t;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.classList.remove('show'), 4500);
+    }
+
+    function copy(text){
+      if(navigator.clipboard && window.isSecureContext){
+        return navigator.clipboard.writeText(text).then(()=>true).catch(()=>fallback(text));
+      }
+      return Promise.resolve(fallback(text));
+    }
+    function fallback(text){
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly','');
+      ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      let ok = false; try{ ok = document.execCommand('copy'); }catch(e){}
+      ta.remove(); return ok;
+    }
+
+    document.getElementById('sendTg').addEventListener('click', ()=>{
+      const text = buildText();
+      copy(text).then(ok=>{
+        showToast(ok ? 'Заявка скопирована ✓ Вставьте её в чат Telegram и отправьте' : 'Откроется Telegram — опишите заказ в чате');
+      });
+      window.open(TG, '_blank', 'noopener');
+    });
+
+    document.getElementById('sendMail').addEventListener('click', ()=>{
+      const subject = 'Заявка на подарок с сайта ИИмоция';
+      location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(buildText());
+    });
+  })();
+
+  // ===== NEW: mobile floating button hides near the contact form =====
+  (function(){
+    const fab = document.getElementById('fab');
+    const contact = document.getElementById('contact');
+    const hero = document.querySelector('header.hero');
+    let inContact = false, inHero = true;
+    const upd = ()=> fab.classList.toggle('hide', inContact || inHero);
+    new IntersectionObserver(e=>{ inContact = e[0].isIntersecting; upd(); },{threshold:0}).observe(contact);
+    new IntersectionObserver(e=>{ inHero = e[0].isIntersecting; upd(); },{threshold:.4}).observe(hero);
   })();
 </script>
 </body>
