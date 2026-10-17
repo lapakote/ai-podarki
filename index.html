@@ -399,6 +399,10 @@
   .cf-row textarea{resize:vertical; min-height:80px; font-family:var(--body)}
   .cf-submit{width:100%; justify-content:center; margin-top:6px}
   .cf-note{font-size:12px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.5}
+  .cf-error{display:none;margin-top:12px;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;text-align:center;
+    color:#FFD0DC;background:rgba(255,77,141,.12);border:1px solid rgba(255,77,141,.35)}
+  .cf-error.show{display:block}
+  .cf-error a{color:var(--amber);font-weight:700}
   .cf-success{
     display:none; text-align:center; padding:20px;
     color:var(--amber); font-weight:700; font-size:15px;
@@ -911,7 +915,8 @@
         </div>
         <div class="case-body">
           <h3>Фото → живой момент</h3>
-          <p>Один кадр превращается в короткую сцену: взгляд, движение, чашка кофе на борту. Для рилса, аватара или подарка-сюрприза.</p>        </div>
+          <p>Один кадр превращается в короткую сцену: взгляд, движение, чашка кофе на борту. Для рилса, аватара или подарка-сюрприза.</p>
+        </div>
       </div>
 
       <div class="case-card reveal">
@@ -1275,7 +1280,13 @@
     <h2 class="reveal">Расскажите, кого хотите порадовать —<br>придумаю подарок вместе с вами</h2>
     <p class="lead reveal">Свяжитесь со мной любым удобным способом.</p>
 
-    <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="contact-form reveal" id="contactForm" action="https://formsubmit.co/mariamarch1426@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Новая заявка с сайта ИИмоция">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://iimotion.tech/#contact">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <div class="cf-fields" id="cfFields">
       <div class="cf-row">
         <label for="cfName">Как вас зовут?</label>
         <input type="text" id="cfName" name="name" placeholder="Ваше имя" required>
@@ -1303,11 +1314,11 @@
         <label for="cfMessage">Расскажите пару слов о задумке</label>
         <textarea id="cfMessage" name="message" placeholder="Кого хотите порадовать, какая история, есть ли идеи по формату..."></textarea>
       </div>
-      <span class="magnetic" style="display:block">
-        <button type="submit" class="btn btn-primary cf-submit">Отправить заявку →</button>
-      </span>
+      <button type="submit" class="btn btn-primary cf-submit">Отправить заявку →</button>
+      <p class="cf-error" id="cfError" role="alert"></p>
       <p class="cf-note">Отвечаю обычно в течение нескольких часов. Никакого спама — только ответ по вашей заявке.</p>
-      <div class="cf-success" id="cfSuccess">
+      </div>
+      <div class="cf-success" id="cfSuccess" role="status">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" color="var(--amber)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
         Заявка отправлена! Свяжусь с вами совсем скоро.
       </div>
@@ -1563,38 +1574,45 @@
     });
   })();
 
-  // ===== contact form AJAX submit =====
+  // ===== contact form: отправка через FormSubmit без перезагрузки =====
   (function(){
     const form = document.getElementById('contactForm');
-    const success = document.getElementById('cfSuccess');
     if(!form) return;
+    const fields = document.getElementById('cfFields');
+    const success = document.getElementById('cfSuccess');
+    const errorBox = document.getElementById('cfError');
+    const submitBtn = form.querySelector('.cf-submit');
+    const ajaxUrl = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+    const fail = () => {
+      errorBox.innerHTML = 'Не получилось отправить заявку. Напишите мне, пожалуйста, в <a href="https://t.me/keuqz" target="_blank" rel="noopener">Telegram</a> — отвечу там.';
+      errorBox.classList.add('show');
+      submitBtn.textContent = 'Отправить заявку →';
+      submitBtn.disabled = false;
+    };
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      const data = new FormData(form);
-      const submitBtn = form.querySelector('.cf-submit');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Отправляю...';
+      errorBox.classList.remove('show');
+      const data = Object.fromEntries(new FormData(form).entries());
+      if(data._honey){ return; } // бот заполнил скрытое поле
+      submitBtn.textContent = 'Отправляю…';
       submitBtn.disabled = true;
-
-      fetch(form.action, {
+      fetch(ajaxUrl, {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(response => {
-        if(response.ok){
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(r => r.json().catch(() => ({})).then(j => ({ok: r.ok, j})))
+      .then(({ok, j}) => {
+        if(ok && (j.success === true || j.success === 'true')){
           form.reset();
-          form.style.display = 'none';
+          fields.style.display = 'none';
           success.classList.add('show');
         } else {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-          alert('Что-то пошло не так. Попробуйте написать в Telegram напрямую.');
+          console.warn('FormSubmit:', j.message || j);
+          fail();
         }
-      }).catch(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        alert('Не получилось отправить. Попробуйте написать в Telegram напрямую.');
-      });
+      })
+      .catch(fail);
     });
   })();
 
